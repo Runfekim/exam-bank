@@ -577,8 +577,20 @@
     const wrap = document.createElement('div');
     wrap.className = 'markdown-body';
     wrap.innerHTML = html;   // marked output; source is our own generated MD
+    structureSolution(wrap);
     els.solutionContent.replaceChildren(wrap);
     typesetMath(wrap);
+  }
+
+  // 렌더된 풀이에 시각 구조 클래스 부여: 섹션 구분선 · 볼드 단계 · 정답 콜아웃
+  function structureSolution(root) {
+    root.querySelectorAll('h2').forEach((h, i) => { if (i > 0) h.classList.add('md-divider'); });
+    root.querySelectorAll('p').forEach((p) => {
+      const t = p.textContent.trim();
+      if (t.startsWith('정답') && t.length <= 32) { p.classList.add('md-answer'); return; }
+      const f = p.firstElementChild;
+      if (f && f.tagName === 'STRONG' && /^(\d+|[ㄱ-ㅎ])\s*[.)]/.test(t)) p.classList.add('md-step');
+    });
   }
 
   function typesetMath(el) {

@@ -692,7 +692,13 @@ button { font-family: inherit; }
   margin: var(--sp-6) 0 var(--sp-2);
 }
 .markdown-body h1 { font-size: var(--fs-xl); }
-.markdown-body h2 { font-size: var(--fs-lg); }
+.markdown-body h2 {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  color: var(--text-muted);
+  margin: var(--sp-5) 0 var(--sp-3);
+}
 .markdown-body h3 { font-size: var(--fs-md); }
 .markdown-body p { margin: var(--sp-3) 0; }
 .markdown-body strong { font-weight: var(--fw-semibold); color: var(--text-strong); }
@@ -735,7 +741,67 @@ button { font-family: inherit; }
 }
 .markdown-body th { background: var(--surface-2); font-weight: var(--fw-semibold); }
 .markdown-body mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
-.markdown-body mjx-container[display="true"] { margin: var(--sp-4) 0; }
+.markdown-body mjx-container[display="true"] {
+  margin: var(--sp-4) 0;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-subtle);
+  border-radius: var(--r-md);
+  text-align: center;
+}
+
+/* ---- 풀이 시각 구조화: 섹션 라인 · 단계 그리드 · 정답 콜아웃 ---- */
+.markdown-body h2.md-divider {
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line);
+}
+/* 번호 단계(ol): 번호 배지 그리드 + 단계 사이 헤어라인 */
+.markdown-body ol {
+  list-style: none;
+  margin: var(--sp-4) 0;
+  padding-left: 0;
+  counter-reset: md-step;
+}
+.markdown-body ol > li {
+  counter-increment: md-step;
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: var(--sp-3);
+  align-items: start;
+  margin: 0;
+  padding: var(--sp-4) 0;
+  border-top: 1px solid var(--line-faint);
+}
+.markdown-body ol > li:first-child { border-top: 0; padding-top: 0; }
+.markdown-body ol > li::before {
+  content: counter(md-step);
+  display: grid;
+  place-items: center;
+  width: 26px; height: 26px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.markdown-body ol > li > *:first-child { margin-top: 0; }
+.markdown-body ol > li > *:last-child { margin-bottom: 0; }
+/* 볼드 단계 문단(ㄱ./ㄴ./1.): 위에 헤어라인으로 구분 */
+.markdown-body p.md-step {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line-faint);
+}
+/* 정답 콜아웃 박스 */
+.markdown-body p.md-answer {
+  margin-top: var(--sp-6);
+  padding: var(--sp-4) var(--sp-5);
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  font-size: var(--fs-md);
+}
 
 /* ============================================================
    Responsive
