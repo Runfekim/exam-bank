@@ -24,11 +24,14 @@
       "answer": "①",
       "answerText": "1",
       "solutionPdf": "data/solutions/공통-01.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 1
-      }
+      },
+      "solutionMd": "data/solutions/공통-01.md",
+      "finalAnswer": "①",
+      "answerMatch": true
     },
     {
       "id": "공통-02",
@@ -39,11 +42,14 @@
       "answer": "④",
       "answerText": "13",
       "solutionPdf": "data/solutions/공통-02.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 1
-      }
+      },
+      "solutionMd": "data/solutions/공통-02.md",
+      "finalAnswer": "④",
+      "answerMatch": true
     },
     {
       "id": "공통-03",
@@ -54,11 +60,14 @@
       "answer": "⑤",
       "answerText": "5",
       "solutionPdf": "data/solutions/공통-03.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 1
-      }
+      },
+      "solutionMd": "data/solutions/공통-03.md",
+      "finalAnswer": "⑤",
+      "answerMatch": true
     },
     {
       "id": "공통-04",
@@ -69,11 +78,14 @@
       "answer": "③",
       "answerText": "3",
       "solutionPdf": "data/solutions/공통-04.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 1
-      }
+      },
+      "solutionMd": "data/solutions/공통-04.md",
+      "finalAnswer": "③",
+      "answerMatch": true
     },
     {
       "id": "공통-05",
@@ -84,11 +96,14 @@
       "answer": "③",
       "answerText": "8",
       "solutionPdf": "data/solutions/공통-05.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 2
-      }
+      },
+      "solutionMd": "data/solutions/공통-05.md",
+      "finalAnswer": "③",
+      "answerMatch": true
     },
     {
       "id": "공통-06",
@@ -97,13 +112,16 @@
       "text": "6.    보다 큰 두 실수 , 가   log log     ,       log  을 만족시킬 때, 의 값은? [3점]       ② ③ ④ ⑤ ①           2",
       "image": "data/images/공통-06.png",
       "answer": "②",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 공통 6번",
+      "answerText": "",
       "solutionPdf": "data/solutions/공통-06.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 2
-      }
+      },
+      "solutionMd": "data/solutions/공통-06.md",
+      "finalAnswer": "②",
+      "answerMatch": true
     },
     {
       "id": "공통-07",
@@ -112,13 +130,16 @@
       "text": "         7.         두 곡선 , 과 직선 로   둘러싸인 부분의 넓이는? [3점]      ② ③ ④ ⑤ ①           20",
       "image": "data/images/공통-07.png",
       "answer": "⑤",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 공통 7번",
+      "answerText": "",
       "solutionPdf": "data/solutions/공통-07.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 2
-      }
+      },
+      "solutionMd": "data/solutions/공통-07.md",
+      "finalAnswer": "⑤",
+      "answerMatch": true
     },
     {
       "id": "공통-08",
@@ -127,13 +148,16 @@
       "text": "sin cos cos sin       8.       이고 일 때, 의 값은? [3점]         ① ② ③              ④ ⑤  ",
       "image": "data/images/공통-08.png",
       "answer": "①",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 공통 8번",
+      "answerText": "",
       "solutionPdf": "data/solutions/공통-08.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 3
-      }
+      },
+      "solutionMd": "data/solutions/공통-08.md",
+      "finalAnswer": "①",
+      "answerMatch": true
     },
     {
       "id": "공통-09",
@@ -144,11 +168,14 @@
       "answer": "④",
       "answerText": "14",
       "solutionPdf": "data/solutions/공통-09.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 3
-      }
+      },
+      "solutionMd": "data/solutions/공통-09.md",
+      "finalAnswer": "④",
+      "answerMatch": true
     },
     {
       "id": "공통-10",
@@ -157,13 +184,16 @@
       "text": "    10.       상수 ( )에 대하여 곡선 위의 점 중 A    제 사분면에 있는 점 를 지나고 축에 평행한 직선이 축과  B C      , 곡선 의 점근선과 만나는 점을 라 만나는 점을   AOC AB BC   하자. 이고 삼각형 의 넓이가 일 때,  O OB × 의 값은? (단, 는 원점이다.) [4점]                     ② ③ ④ ⑤ ① 20",
       "image": "data/images/공통-10.png",
       "answer": "③",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 공통 10번",
+      "answerText": "",
       "solutionPdf": "data/solutions/공통-10.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 3
-      }
+      },
+      "solutionMd": "data/solutions/공통-10.md",
+      "finalAnswer": "③",
+      "answerMatch": true
     },
     {
       "id": "공통-11",
@@ -172,13 +202,16 @@
       "text": " 11.   시각 일 때 원점을 출발하여 수직선 위를 움직이는 P P    ≥  점 가 있다. 실수 에 대하여 시각이 ( )일 때 점 의   가 속도          이다. <보기>에서 옳은 것만을 있는 대로 고른 것은? [4점] <보 기>  P       ㄱ. 이면, 시각 일 때 점 의 위치는 이다.   P    ㄴ. 이면, 출발한 후 점 의 운동 방향이 한 번 바뀐다. P          ㄷ. 이면, 시각 에서 까지 점 가  이다. 움직인 거리는 ① ㄱ ② ㄱ, ㄴ ③ ㄱ, ㄷ ④ ㄴ, ㄷ ⑤ ㄱ, ㄴ, ㄷ 4",
       "image": "data/images/공통-11.png",
       "answer": "③",
-      "answerText": "ㄱ, ㄷ",
+      "answerText": "",
       "solutionPdf": "data/solutions/공통-11.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 4
-      }
+      },
+      "solutionMd": "data/solutions/공통-11.md",
+      "finalAnswer": "③",
+      "answerMatch": true
     },
     {
       "id": "공통-12",
@@ -187,13 +220,16 @@
       "text": "  12.  등비수열 이                         을 만족시킬 때, 의 값은? [4점]       ① ② ③ ④ ⑤           20",
       "image": "data/images/공통-12.png",
       "answer": "②",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 공통 12번",
+      "answerText": "",
       "solutionPdf": "data/solutions/공통-12.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 4
-      }
+      },
+      "solutionMd": "data/solutions/공통-12.md",
+      "finalAnswer": "②",
+      "answerMatch": true
     },
     {
       "id": "공통-13",
@@ -204,11 +240,14 @@
       "answer": "⑤",
       "answerText": "49",
       "solutionPdf": "data/solutions/공통-13.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 5
-      }
+      },
+      "solutionMd": "data/solutions/공통-13.md",
+      "finalAnswer": "⑤ 49",
+      "answerMatch": true
     },
     {
       "id": "공통-14",
@@ -217,13 +256,16 @@
       "text": "   ∠B AB BC    14.   그림과 같이 , 이고 인 직각삼각형   ABC AB D    가 있다. 선분 를 로 내분하는 점을 ,  A AC AD 점 를 중심으로 하고 반지름의 길이가 인 원이 선분 와 E AB D , 직선 가 이 원과 만나는 점 중 가 아닌 점을 만나는 점을    F EF G CG    라 하고, 호 위의 점 를 이 되도록 잡는다. ∠BAC ∠HCG C E G H  , , 를 지나는 원 위의 점 가 를 세 점 GH 의 길이는? [4점] 만족시킬 때, 선분             ① ② ③               ④ ⑤     20",
       "image": "data/images/공통-14.png",
       "answer": "④",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 공통 14번",
+      "answerText": "",
       "solutionPdf": "data/solutions/공통-14.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 5
-      }
+      },
+      "solutionMd": "data/solutions/공통-14.md",
+      "finalAnswer": "④",
+      "answerMatch": true
     },
     {
       "id": "공통-15",
@@ -232,13 +274,16 @@
       "text": " 15.  함수 가                 ≥        이고, 양수 에 대하여 함수 를                 ≤           ≥              이라 하자. 함수 가 오직 하나의       극값을 갖도록 하는 의 최댓값을 라 하자. 일 때,     의 값은? [4점]      ② ③ ④ ⑤ ①           6",
       "image": "data/images/공통-15.png",
       "answer": "④",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 공통 15번",
+      "answerText": "",
       "solutionPdf": "data/solutions/공통-15.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 6
-      }
+      },
+      "solutionMd": "data/solutions/공통-15.md",
+      "finalAnswer": "④",
+      "answerMatch": true
     },
     {
       "id": "공통-16",
@@ -249,11 +294,14 @@
       "answer": "",
       "answerText": "9",
       "solutionPdf": "data/solutions/공통-16.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 6
-      }
+      },
+      "solutionMd": "data/solutions/공통-16.md",
+      "finalAnswer": "9",
+      "answerMatch": true
     },
     {
       "id": "공통-17",
@@ -264,11 +312,14 @@
       "answer": "",
       "answerText": "16",
       "solutionPdf": "data/solutions/공통-17.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 6
-      }
+      },
+      "solutionMd": "data/solutions/공통-17.md",
+      "finalAnswer": "16",
+      "answerMatch": true
     },
     {
       "id": "공통-18",
@@ -279,11 +330,14 @@
       "answer": "",
       "answerText": "12",
       "solutionPdf": "data/solutions/공통-18.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 7
-      }
+      },
+      "solutionMd": "data/solutions/공통-18.md",
+      "finalAnswer": "12",
+      "answerMatch": true
     },
     {
       "id": "공통-19",
@@ -294,11 +348,14 @@
       "answer": "",
       "answerText": "15",
       "solutionPdf": "data/solutions/공통-19.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 7
-      }
+      },
+      "solutionMd": "data/solutions/공통-19.md",
+      "finalAnswer": "15",
+      "answerMatch": true
     },
     {
       "id": "공통-20",
@@ -309,11 +366,14 @@
       "answer": "",
       "answerText": "130",
       "solutionPdf": "data/solutions/공통-20.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 7
-      }
+      },
+      "solutionMd": "data/solutions/공통-20.md",
+      "finalAnswer": "130",
+      "answerMatch": true
     },
     {
       "id": "공통-21",
@@ -324,11 +384,14 @@
       "answer": "",
       "answerText": "65",
       "solutionPdf": "data/solutions/공통-21.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 8
-      }
+      },
+      "solutionMd": "data/solutions/공통-21.md",
+      "finalAnswer": "65",
+      "answerMatch": true
     },
     {
       "id": "공통-22",
@@ -339,11 +402,14 @@
       "answer": "",
       "answerText": "457",
       "solutionPdf": "data/solutions/공통-22.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 8
-      }
+      },
+      "solutionMd": "data/solutions/공통-22.md",
+      "finalAnswer": "457",
+      "answerMatch": true
     },
     {
       "id": "확률과통계-23",
@@ -354,11 +420,14 @@
       "answer": "③",
       "answerText": "64",
       "solutionPdf": "data/solutions/확률과통계-23.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 9
-      }
+      },
+      "solutionMd": "data/solutions/확률과통계-23.md",
+      "finalAnswer": "③",
+      "answerMatch": true
     },
     {
       "id": "확률과통계-24",
@@ -367,13 +436,16 @@
       "text": "  24. 두 사건 , 에 대하여   P P P ∪            , ,     P   일 때, 의 값은? [3점]      ② ③ ④ ⑤ ①           20",
       "image": "data/images/확률과통계-24.png",
       "answer": "①",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 확률과통계 24번",
+      "answerText": "",
       "solutionPdf": "data/solutions/확률과통계-24.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 9
-      }
+      },
+      "solutionMd": "data/solutions/확률과통계-24.md",
+      "finalAnswer": "①",
+      "answerMatch": true
     },
     {
       "id": "확률과통계-25",
@@ -382,13 +454,16 @@
       "text": "25.      주머니에 숫자 , , , , 가 하나씩 적혀 있는       흰 공 개와 숫자 , , , , 이 하나씩 적혀 있는   개가 들어 있다. 이 주머니에서 임의로 개의 공을 검은 공  개의 공이 서로 같은 색이거나 동시에 꺼낼 때, 꺼낸  개의 공에 적힌 수가 서로 같을 확률은? [3점] 꺼낸      ② ③ ④ ⑤ ①           10",
       "image": "data/images/확률과통계-25.png",
       "answer": "②",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 확률과통계 25번",
+      "answerText": "",
       "solutionPdf": "data/solutions/확률과통계-25.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 10
-      }
+      },
+      "solutionMd": "data/solutions/확률과통계-25.md",
+      "finalAnswer": "②",
+      "answerMatch": true
     },
     {
       "id": "확률과통계-26",
@@ -399,11 +474,14 @@
       "answer": "⑤",
       "answerText": "5.5",
       "solutionPdf": "data/solutions/확률과통계-26.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 10
-      }
+      },
+      "solutionMd": "data/solutions/확률과통계-26.md",
+      "finalAnswer": "⑤",
+      "answerMatch": true
     },
     {
       "id": "확률과통계-27",
@@ -414,11 +492,14 @@
       "answer": "④",
       "answerText": "45",
       "solutionPdf": "data/solutions/확률과통계-27.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 11
-      }
+      },
+      "solutionMd": "data/solutions/확률과통계-27.md",
+      "finalAnswer": "④",
+      "answerMatch": true
     },
     {
       "id": "확률과통계-28",
@@ -427,13 +508,16 @@
       "text": "28.    개의 공과 부터 까지의 자연수가 하나씩 적혀 있는 여섯 개의 빈 상자가 있다. 한 개의 주사위를 사용하여 다음 시행을 한다.  일 때, 주사위를 한 번 던져 나온 눈의 수가  가 홀수이면     , , 가 적힌 상자에 공을 각각 개씩 넣고,  가 짝수이면   의 약수가 적힌 상자에 공을 각각 개씩 넣는다.  이 시행을 번 반복한 후 여섯 개의 상자에 들어 있는  이 적힌 상자에 들어 있는 모든 공의 개수의 합이 홀수일 때,  가 적힌 상자에 들어 있는 공의 개수보다 공의 개수가  개 더 많을 확률은? [4점]      ② ③ ④ ⑤ ①           20",
       "image": "data/images/확률과통계-28.png",
       "answer": "②",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 확률과통계 28번",
+      "answerText": "",
       "solutionPdf": "data/solutions/확률과통계-28.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 11
-      }
+      },
+      "solutionMd": "data/solutions/확률과통계-28.md",
+      "finalAnswer": "②",
+      "answerMatch": true
     },
     {
       "id": "확률과통계-29",
@@ -444,11 +528,14 @@
       "answer": "",
       "answerText": "977",
       "solutionPdf": "data/solutions/확률과통계-29.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 12
-      }
+      },
+      "solutionMd": "data/solutions/확률과통계-29.md",
+      "finalAnswer": "977",
+      "answerMatch": true
     },
     {
       "id": "확률과통계-30",
@@ -459,11 +546,14 @@
       "answer": "",
       "answerText": "262",
       "solutionPdf": "data/solutions/확률과통계-30.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 12
-      }
+      },
+      "solutionMd": "data/solutions/확률과통계-30.md",
+      "finalAnswer": "262",
+      "answerMatch": true
     },
     {
       "id": "미적분-23",
@@ -474,11 +564,14 @@
       "answer": "③",
       "answerText": "3",
       "solutionPdf": "data/solutions/미적분-23.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 13
-      }
+      },
+      "solutionMd": "data/solutions/미적분-23.md",
+      "finalAnswer": "③",
+      "answerMatch": true
     },
     {
       "id": "미적분-24",
@@ -487,13 +580,16 @@
       "text": "       sin sin     24. 의 값은? [3점]       ② ③ ④ ⑤ ①           20",
       "image": "data/images/미적분-24.png",
       "answer": "④",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 미적분 24번",
+      "answerText": "",
       "solutionPdf": "data/solutions/미적분-24.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 13
-      }
+      },
+      "solutionMd": "data/solutions/미적분-24.md",
+      "finalAnswer": "④",
+      "answerMatch": true
     },
     {
       "id": "미적분-25",
@@ -502,13 +598,16 @@
       "text": "  25.   수열 이 모든 자연수 에 대하여                        lim 을 만족시킬 때, 의 값은? [3점]         → ∞       ① ② ③ ④ ⑤           14",
       "image": "data/images/미적분-25.png",
       "answer": "③",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 미적분 25번",
+      "answerText": "",
       "solutionPdf": "data/solutions/미적분-25.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 14
-      }
+      },
+      "solutionMd": "data/solutions/미적분-25.md",
+      "finalAnswer": "③",
+      "answerMatch": true
     },
     {
       "id": "미적분-26",
@@ -517,13 +616,16 @@
       "text": "  ln   26.      그림과 같이 곡선 와 축 및 두 직선       , 로 둘러싸인 부분을 밑면으로 하는 입체도형이  축에 수직인 평면으로 자른 단면이 있다. 이 입체도형을 모두 정삼각형일 때, 이 입체도형의 부피는? [3점]       ln ln ln                ① ② ③           ln ln           ④ ⑤     20",
       "image": "data/images/미적분-26.png",
       "answer": "①",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 미적분 26번",
+      "answerText": "",
       "solutionPdf": "data/solutions/미적분-26.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 14
-      }
+      },
+      "solutionMd": "data/solutions/미적분-26.md",
+      "finalAnswer": "①",
+      "answerMatch": true
     },
     {
       "id": "미적분-27",
@@ -532,13 +634,16 @@
       "text": "27.  매개변수 로 나타내어진 곡선         cos sin              ,        를 라 하자. 곡선 가 직선 와 만나는 점을 P P  라 할 때, 곡선 위의 점 에서의 접선의 기울기는? [3점]        ② ③ ①                ④ ⑤         15",
       "image": "data/images/미적분-27.png",
       "answer": "②",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 미적분 27번",
+      "answerText": "",
       "solutionPdf": "data/solutions/미적분-27.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 15
-      }
+      },
+      "solutionMd": "data/solutions/미적분-27.md",
+      "finalAnswer": "②",
+      "answerMatch": true
     },
     {
       "id": "미적분-28",
@@ -547,13 +652,16 @@
       "text": "28. 함수   ln                      와 양수 에 대하여 점 ( )에서 축에 내린         위의 점 에서의 접선이 수선의 발과 곡선    축과 만나는 점 사이의 거리가 가 되도록 하는 의 값을          라 하자. 의 값은? [4점]       ln ln ln       ① ② ③         ln ln     ④ ⑤     20",
       "image": "data/images/미적분-28.png",
       "answer": "⑤",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 미적분 28번",
+      "answerText": "",
       "solutionPdf": "data/solutions/미적분-28.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 15
-      }
+      },
+      "solutionMd": "data/solutions/미적분-28.md",
+      "finalAnswer": "⑤",
+      "answerMatch": true
     },
     {
       "id": "미적분-29",
@@ -564,11 +672,14 @@
       "answer": "",
       "answerText": "97",
       "solutionPdf": "data/solutions/미적분-29.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 16
-      }
+      },
+      "solutionMd": "data/solutions/미적분-29.md",
+      "finalAnswer": "97",
+      "answerMatch": true
     },
     {
       "id": "미적분-30",
@@ -579,11 +690,14 @@
       "answer": "",
       "answerText": "11",
       "solutionPdf": "data/solutions/미적분-30.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 16
-      }
+      },
+      "solutionMd": "data/solutions/미적분-30.md",
+      "finalAnswer": "11",
+      "answerMatch": true
     },
     {
       "id": "기하-23",
@@ -594,11 +708,14 @@
       "answer": "③",
       "answerText": "3",
       "solutionPdf": "data/solutions/기하-23.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 17
-      }
+      },
+      "solutionMd": "data/solutions/기하-23.md",
+      "finalAnswer": "③ 3",
+      "answerMatch": true
     },
     {
       "id": "기하-24",
@@ -609,11 +726,14 @@
       "answer": "①",
       "answerText": "6",
       "solutionPdf": "data/solutions/기하-24.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 17
-      }
+      },
+      "solutionMd": "data/solutions/기하-24.md",
+      "finalAnswer": "①",
+      "answerMatch": true
     },
     {
       "id": "기하-25",
@@ -624,11 +744,14 @@
       "answer": "⑤",
       "answerText": "5",
       "solutionPdf": "data/solutions/기하-25.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 18
-      }
+      },
+      "solutionMd": "data/solutions/기하-25.md",
+      "finalAnswer": "⑤",
+      "answerMatch": true
     },
     {
       "id": "기하-26",
@@ -637,13 +760,16 @@
       "text": "F F ′ 26.  양수 에 대하여 두 초점이 , 인                 위의 점 에서의 접선이 쌍곡선         P PF PF ′    ×  축과 만나는 점을 라 하자. 일 때, 의 값은? [3점]                    ② ③ ④ ⑤ ①       20",
       "image": "data/images/기하-26.png",
       "answer": "②",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 기하 26번",
+      "answerText": "",
       "solutionPdf": "data/solutions/기하-26.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 18
-      }
+      },
+      "solutionMd": "data/solutions/기하-26.md",
+      "finalAnswer": "②",
+      "answerMatch": true
     },
     {
       "id": "기하-27",
@@ -652,13 +778,16 @@
       "text": "  27.  그림과 같이 지름의 길이가 인 두 원 , 를    AB    위의 인 두 밑면으로 하는 원기둥이 있고, 원   A B C D CD    두 점 , 와 원 위의 인 두 점 , 에 대하여    D AD BC   이다. 점 에서 원 을 포함하는 평면에 내린  H ABCD 라 하자. 사각형 의 넓이가 수선의 발을 ABH  의 넓이의 배일 때, 이 원기둥의 높이는? [3점] 삼각형                  ① ② ③ ④ ⑤ 19",
       "image": "data/images/기하-27.png",
       "answer": "④",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 기하 27번",
+      "answerText": "",
       "solutionPdf": "data/solutions/기하-27.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 19
-      }
+      },
+      "solutionMd": "data/solutions/기하-27.md",
+      "finalAnswer": "④",
+      "answerMatch": true
     },
     {
       "id": "기하-28",
@@ -667,13 +796,16 @@
       "text": "      AB CD BC BD     28.    그림과 같이 , 인 ABCD A CD H 사면체 가 있고, 점 에서 직선 에 내린 수선의 발 에  ABH BCD AH   대하여 두 평면 와 는 서로 수직이고 이다. ABH G 의 무게중심을 라 하고, 삼각형 G ACD  를 중심으로 하고 평면 에 접하는 구를 라 하자. 점  P ∠APG    인 구 위의 모든 점 가 나타내는 도형을 라 할 때,   ABC  도형 의 평면 위로의 정사영의 넓이는? [4점]      ① ② ③ ④ ⑤           20",
       "image": "data/images/기하-28.png",
       "answer": "④",
-      "answerText": "2026학년도 대학수학능력시험 수학영역 · 기하 28번",
+      "answerText": "",
       "solutionPdf": "data/solutions/기하-28.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 19
-      }
+      },
+      "solutionMd": "data/solutions/기하-28.md",
+      "finalAnswer": "④",
+      "answerMatch": true
     },
     {
       "id": "기하-29",
@@ -684,11 +816,14 @@
       "answer": "",
       "answerText": "360",
       "solutionPdf": "data/solutions/기하-29.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 20
-      }
+      },
+      "solutionMd": "data/solutions/기하-29.md",
+      "finalAnswer": "360",
+      "answerMatch": true
     },
     {
       "id": "기하-30",
@@ -699,11 +834,14 @@
       "answer": "",
       "answerText": "221",
       "solutionPdf": "data/solutions/기하-30.pdf",
-      "solutionStatus": "ingested",
+      "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
         "page": 20
-      }
+      },
+      "solutionMd": "data/solutions/기하-30.md",
+      "finalAnswer": "221",
+      "answerMatch": true
     }
   ]
 }
