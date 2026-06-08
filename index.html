@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXAM Bank — 문제집 · 풀이 보관소</title>
+  <meta name="description" content="문제집과 풀이 PDF를 모아 보는 보관소" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-mark">📚</span>
+        <div>
+          <h1>EXAM Bank</h1>
+          <p class="tagline">문제집 · 풀이 PDF 보관소</p>
+        </div>
+      </div>
+      <div class="search">
+        <input id="search" type="search" placeholder="제목 · 과목 · 태그 검색…" autocomplete="off" />
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <nav class="filters" id="subject-filters" aria-label="과목 필터"></nav>
+
+    <p class="count" id="result-count"></p>
+
+    <section class="grid" id="grid" aria-live="polite"></section>
+
+    <div class="empty" id="empty" hidden>
+      <h2>아직 등록된 자료가 없어요</h2>
+      <p>
+        <code>pdfs/problems/&lt;과목&gt;/&lt;제목&gt;.pdf</code> 에 문제 PDF를,<br />
+        같은 경로의 <code>pdfs/solutions/…</code> 에 풀이 PDF를 넣고 push 하면<br />
+        목록이 자동으로 채워집니다. 자세한 사용법은 <code>README.md</code> 참고.
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span id="total-line"></span>
+      <a id="repo-link" href="#" target="_blank" rel="noopener">GitHub 저장소</a>
+    </div>
+  </footer>
+
+  <!-- PDF 뷰어 모달 -->
+  <div class="modal" id="viewer" hidden>
+    <div class="modal-bar">
+      <span class="modal-title" id="viewer-title"></span>
+      <div class="modal-actions">
+        <a id="viewer-open" href="#" target="_blank" rel="noopener" class="btn ghost">새 탭에서 열기 ↗</a>
+        <a id="viewer-download" href="#" download class="btn ghost">다운로드 ↓</a>
+        <button id="viewer-close" class="btn close" aria-label="닫기">✕</button>
+      </div>
+    </div>
+    <iframe id="viewer-frame" title="PDF 미리보기"></iframe>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
