@@ -167,6 +167,7 @@
 
   function showView(which) {
     const isList = which === 'list';
+    document.body.dataset.route = which;       // 홈(list)에선 푸터 숨김 (CSS)
     els.viewList.hidden = !isList;
     els.viewExam.hidden = isList;
     els.searchWrap.hidden = isList;            // search only on exam view

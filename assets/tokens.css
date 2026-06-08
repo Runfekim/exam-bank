@@ -10,6 +10,7 @@
   --surface:       #ffffff;
   --surface-2:     #f5f5f7;
   --surface-hover: #f0f0f3;
+  --paper:         #ffffff;   /* 시험 문제 이미지 배경 — 다크모드에서도 항상 흰색 유지 */
 
   /* ---- Text ---- */
   --text-strong:   #1d1d1f;   /* 거의 블랙 */

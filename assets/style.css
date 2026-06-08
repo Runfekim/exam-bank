@@ -433,7 +433,7 @@ button { font-family: inherit; }
   padding: 0;
   border: 0;
   border-block: 1px solid var(--line-faint);
-  background: var(--surface);
+  background: var(--paper);   /* 문제 이미지 배경 항상 흰색 */
   cursor: pointer;
   appearance: none;
 }
@@ -441,7 +441,7 @@ button { font-family: inherit; }
   width: 100%;
   height: auto;
   object-fit: contain;
-  background: var(--surface);
+  background: var(--paper);
   transition: opacity var(--dur) var(--ease);
 }
 .card-thumb:hover img { opacity: 0.88; }
@@ -554,6 +554,7 @@ button { font-family: inherit; }
   border-top: 1px solid var(--line);
   margin-top: var(--sp-8);
 }
+body[data-route="list"] .site-footer { display: none; }   /* 홈(시험지 목록) 화면 푸터 제거 */
 .footer-inner {
   display: flex;
   align-items: center;
@@ -634,7 +635,7 @@ button { font-family: inherit; }
 }
 
 .detail-figure {
-  background: var(--surface-2);
+  background: var(--paper);   /* 문제 이미지 배경 항상 흰색 */
   border: 1px solid var(--line);
   border-radius: var(--r-md);
   padding: var(--sp-4);
