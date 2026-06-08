@@ -1,6 +1,7 @@
 name: Deploy to GitHub Pages
 
-# pdfs/ 에 PDF를 넣고 push 하면 → 카탈로그를 다시 만들고 → Pages 로 배포합니다.
+# 빌드 스텝 없음 — data/db.json 은 비공개 스킬(exam-db-builder)이 로컬에서 생성/커밋한다.
+# 이 워크플로는 정적 파일을 그대로 Pages 로 배포만 한다.
 on:
   push:
     branches: [main]
@@ -16,33 +17,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Build catalog from pdfs/
-        run: node scripts/build-catalog.mjs
-
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true   # Pages 가 꺼져 있으면 자동으로 켭니다 (수동 설정 불필요)
-
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
       - id: deployment
         uses: actions/deploy-pages@v4

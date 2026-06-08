@@ -1,398 +1,536 @@
-"use strict";
-
 /* ============================================================
-   EXAM Bank — 정적 카탈로그 뷰어 (catalog.json v2 "세트" 모델)
-   흐름: 라이브러리(세트 카드) → 세트 상세(문제지 + 그룹별 풀이) → PDF 모달.
-   catalog.json 은 GitHub Action(scripts/build-catalog.mjs)이 자동 생성한다.
-   스키마: { version, count, sets:[{ id, title, subject, tags,
-            problems:[{label,pdf,size}],
-            solutionGroups:[{group, items:[{label,pdf,size}]}],
-            problemCount, solutionCount }] }
-   pdf 경로는 저장소 루트 기준 상대경로 → 사이트(루트 서빙)에서 그대로 사용.
+   EXAM Bank — 문항 단위 DB 뷰어 (Vanilla JS · no build step)
+   data/db.json (version 3) 을 읽어 문항 그리드 + 상세 모달을 렌더.
    ============================================================ */
+'use strict';
 
-const SUBJECTS_KNOWN = ["수학", "국어", "영어", "과학", "사회", "한국사", "기타"];
+(function () {
+  // ---- DOM refs ----------------------------------------------------------
+  const $ = (sel, root = document) => root.querySelector(sel);
 
-const state = {
-  sets: [],
-  subject: "전체",
-  query: "",
-};
+  const els = {
+    brandTitle: $('#brand-title'),
+    brandSub: $('#brand-sub'),
+    search: $('#search'),
+    searchClear: $('#search-clear'),
+    groupFilters: $('#group-filters'),
+    sortToggle: $('#sort-toggle'),
+    sortLabel: $('#sort-label'),
+    resultCount: $('#result-count'),
+    grid: $('#grid'),
+    skeleton: $('#skeleton'),
+    empty: $('#empty'),
+    loadError: $('#load-error'),
+    noResults: $('#no-results'),
+    footerLine: $('#footer-line'),
+    // detail modal
+    detail: $('#detail'),
+    detailBackdrop: $('#detail-backdrop'),
+    detailNum: $('#detail-num'),
+    detailAnswer: $('#detail-answer'),
+    detailSource: $('#detail-source'),
+    detailSourceLabel: $('#detail-source-label'),
+    detailClose: $('#detail-close'),
+    detailImage: $('#detail-image'),
+    detailTitle: $('#detail-title'),
+    solutionPdfLink: $('#solution-pdf-link'),
+    solutionContent: $('#solution-content'),
+  };
 
-const el = {
-  grid: document.getElementById("grid"),
-  skeleton: document.getElementById("skeleton"),
-  empty: document.getElementById("empty"),
-  noResults: document.getElementById("no-results"),
-  filters: document.getElementById("subject-filters"),
-  search: document.getElementById("search"),
-  count: document.getElementById("result-count"),
-  totalLine: document.getElementById("total-line"),
-  repoLink: document.getElementById("repo-link"),
-  // detail
-  detail: document.getElementById("detail"),
-  detailBody: document.getElementById("detail-body"),
-  // viewer
-  viewer: document.getElementById("viewer"),
-  viewerFrame: document.getElementById("viewer-frame"),
-  viewerTitle: document.getElementById("viewer-title"),
-  viewerOpen: document.getElementById("viewer-open"),
-  viewerDownload: document.getElementById("viewer-download"),
-  viewerClose: document.getElementById("viewer-close"),
-};
+  // ---- State -------------------------------------------------------------
+  const state = {
+    db: null,
+    questions: [],
+    groupOrder: [],          // db.groups order (canonical)
+    activeGroup: 'all',      // 'all' | group name
+    query: '',
+    sortMode: 'group',       // 'group' | 'number'
+    lastFocused: null,       // element to restore focus to after modal close
+    mdCache: new Map(),      // url -> rendered HTML string
+  };
 
-// 모달/오버레이가 닫힐 때 포커스를 되돌릴 트리거 요소
-let detailTrigger = null;
-let viewerTrigger = null;
-
-init();
-
-async function init() {
-  setRepoLink();
-  bindGlobalEvents();
-  try {
-    const res = await fetch("data/catalog.json", { cache: "no-cache" });
-    const data = await res.json();
-    state.sets = Array.isArray(data.sets) ? data.sets : [];
-  } catch (e) {
-    state.sets = [];
+  // ---- Utilities ---------------------------------------------------------
+  function escapeHTML(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
-  if (el.skeleton) el.skeleton.hidden = true;
-  renderFilters();
-  render();
-}
 
-/* ---- icon helper ---------------------------------------------------- */
-function icon(id, cls) {
-  return `<svg class="icon ${cls || ""}" aria-hidden="true"><use href="#${id}"/></svg>`;
-}
+  // Strip Private-Use-Area glyphs (from PDF text extraction) so search/display
+  // stay clean. Keeps normal text, digits, punctuation, Hangul, etc.
+  function cleanText(s) {
+    if (!s) return '';
+    return String(s)
+      .replace(/[-]/g, ' ')   // BMP private use area
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
 
-function bindGlobalEvents() {
-  el.search.addEventListener("input", (e) => {
-    state.query = e.target.value.trim().toLowerCase();
-    render();
-  });
+  function debounce(fn, ms) {
+    let t;
+    return function (...args) {
+      clearTimeout(t);
+      t = setTimeout(() => fn.apply(this, args), ms);
+    };
+  }
 
-  // PDF viewer
-  el.viewerClose.addEventListener("click", closeViewer);
-  el.viewer.addEventListener("click", (e) => {
-    if (e.target === el.viewer) closeViewer();
-  });
+  // The single answer to show on a badge: prefer the choice glyph (answer),
+  // fall back to answerText. Either may be empty.
+  function answerBadgeText(q) {
+    const a = (q.answer || '').trim();
+    const t = (q.answerText || '').trim();
+    if (a && t && a !== t) return `${a} (${t})`;
+    return a || t || '';
+  }
 
-  // ESC: 뷰어가 위, 그 다음 상세
-  document.addEventListener("keydown", (e) => {
-    if (e.key !== "Escape") return;
-    if (!el.viewer.hidden) closeViewer();
-    else if (!el.detail.hidden) closeDetail();
-  });
-}
+  // ---- Data load ---------------------------------------------------------
+  async function load() {
+    try {
+      const res = await fetch('data/db.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const db = await res.json();
+      state.db = db;
+      state.questions = Array.isArray(db.questions) ? db.questions : [];
+      state.groupOrder = Array.isArray(db.groups) ? db.groups.slice() : [];
+      hydrateChrome(db);
+      hideSkeleton();
 
-/* ============================================================
-   Subject filters
-   ============================================================ */
-function subjects() {
-  const set = new Set(state.sets.map((s) => s.subject || "기타"));
-  return ["전체", ...[...set].sort((a, b) => a.localeCompare(b, "ko"))];
-}
+      if (state.questions.length === 0) {
+        els.empty.hidden = false;
+        return;
+      }
+      buildGroupFilters();
+      render();
+    } catch (err) {
+      console.error('[EXAM Bank] failed to load db.json:', err);
+      hideSkeleton();
+      els.loadError.hidden = false;
+    }
+  }
 
-function renderFilters() {
-  el.filters.innerHTML = "";
-  for (const s of subjects()) {
-    const b = document.createElement("button");
-    b.className = "chip";
-    b.type = "button";
-    b.textContent = s;
-    b.setAttribute("aria-pressed", s === state.subject ? "true" : "false");
-    b.addEventListener("click", () => {
-      state.subject = s;
-      renderFilters();
+  function hideSkeleton() {
+    els.skeleton.hidden = true;
+    els.skeleton.style.display = 'none';
+  }
+
+  function hydrateChrome(db) {
+    const title = db.title || 'EXAM Bank';
+    document.title = `${title} — EXAM Bank`;
+    els.brandTitle.textContent = title;
+    const sub = [db.subject, db.count != null ? `총 ${db.count}문항` : null]
+      .filter(Boolean).join(' · ');
+    els.brandSub.textContent = sub || '문항 보관소';
+
+    els.footerLine.textContent = [db.title, db.subject,
+      db.count != null ? `${db.count}문항` : null].filter(Boolean).join(' · ');
+  }
+
+  // ---- Group filter chips ------------------------------------------------
+  function buildGroupFilters() {
+    const counts = {};
+    for (const q of state.questions) {
+      counts[q.group] = (counts[q.group] || 0) + 1;
+    }
+    // Canonical order from db.groups, then any extra groups found in data.
+    const groups = state.groupOrder.slice();
+    for (const g of Object.keys(counts)) {
+      if (!groups.includes(g)) groups.push(g);
+    }
+
+    const frag = document.createDocumentFragment();
+    frag.appendChild(makeChip('all', '전체', state.questions.length));
+    for (const g of groups) {
+      if (!counts[g]) continue;
+      frag.appendChild(makeChip(g, g, counts[g]));
+    }
+    els.groupFilters.replaceChildren(frag);
+    updateChipState();
+  }
+
+  function makeChip(value, label, count) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'chip';
+    btn.dataset.group = value;
+    btn.setAttribute('aria-pressed', String(value === state.activeGroup));
+    btn.innerHTML =
+      `<span class="chip-label">${escapeHTML(label)}</span>` +
+      `<span class="chip-count">${count}</span>`;
+    btn.addEventListener('click', () => {
+      state.activeGroup = value;
+      updateChipState();
       render();
     });
-    el.filters.appendChild(b);
-  }
-}
-
-/* ============================================================
-   Library list
-   ============================================================ */
-function filtered() {
-  return state.sets.filter((s) => {
-    if (state.subject !== "전체" && (s.subject || "기타") !== state.subject) return false;
-    if (!state.query) return true;
-    const hay = [s.title, s.subject, ...(s.tags || [])].join(" ").toLowerCase();
-    return hay.includes(state.query);
-  });
-}
-
-function render() {
-  const list = filtered();
-  el.grid.innerHTML = "";
-
-  const noData = state.sets.length === 0;
-  el.empty.hidden = !noData;
-  el.noResults.hidden = noData || list.length > 0;
-
-  for (const s of list) el.grid.appendChild(card(s));
-
-  el.count.textContent = noData ? "" : `${list.length}개 세트`;
-  el.totalLine.textContent = noData ? "" : `총 ${state.sets.length}개 세트`;
-}
-
-function subjectAttr(subject) {
-  return SUBJECTS_KNOWN.includes(subject) ? subject : "";
-}
-
-function card(s) {
-  const subject = s.subject || "기타";
-  const c = document.createElement("button");
-  c.className = "card";
-  c.type = "button";
-  c.setAttribute("data-subject", subjectAttr(subject));
-  c.setAttribute("aria-label", `${s.title} 세트 열기`);
-
-  const pCount = s.problemCount != null ? s.problemCount : (s.problems || []).length;
-  const sCount = s.solutionCount != null
-    ? s.solutionCount
-    : (s.solutionGroups || []).reduce((n, g) => n + (g.items || []).length, 0);
-
-  const tags = (s.tags || [])
-    .map((t) => `<span class="tag">#${escapeHtml(t)}</span>`)
-    .join("");
-
-  c.innerHTML = `
-    <span class="card-subject">${escapeHtml(subject)}</span>
-    <span class="card-title">${escapeHtml(s.title || s.id)}</span>
-    <span class="card-stats">
-      <span>문제 ${pCount}</span><span class="dot">·</span><span>풀이 ${sCount}</span>
-    </span>
-    ${tags ? `<span class="tags">${tags}</span>` : ""}
-  `;
-
-  c.addEventListener("click", () => openDetail(s, c));
-  return c;
-}
-
-/* ============================================================
-   Set detail overlay
-   ============================================================ */
-function openDetail(set, trigger) {
-  detailTrigger = trigger || null;
-  el.detail.setAttribute("data-subject", subjectAttr(set.subject || "기타"));
-  el.detailBody.innerHTML = renderDetail(set);
-  wireDetail(set);
-  el.detail.hidden = false;
-  document.body.style.overflow = "hidden";
-  const back = el.detailBody.querySelector(".detail-back");
-  if (back) back.focus();
-}
-
-function closeDetail() {
-  el.detail.hidden = true;
-  el.detailBody.innerHTML = "";
-  if (el.viewer.hidden) document.body.style.overflow = "";
-  if (detailTrigger && document.contains(detailTrigger)) detailTrigger.focus();
-  detailTrigger = null;
-}
-
-function renderDetail(set) {
-  const subject = set.subject || "기타";
-  const pCount = set.problemCount != null ? set.problemCount : (set.problems || []).length;
-  const groups = set.solutionGroups || [];
-  const sCount = set.solutionCount != null
-    ? set.solutionCount
-    : groups.reduce((n, g) => n + (g.items || []).length, 0);
-
-  const tags = (set.tags || [])
-    .map((t) => `<span class="tag">#${escapeHtml(t)}</span>`)
-    .join("");
-
-  /* ---- 문제지 섹션 ---- */
-  const problems = set.problems || [];
-  const problemsHtml = problems.length
-    ? `<div class="problem-list">${problems
-        .map((p, i) => `
-          <button class="btn problem btn-lg" type="button" data-problem="${i}">
-            ${icon("i-file", "icon-sm")}
-            <span class="label">${escapeHtml(p.label || "문제지")}</span>
-            <span class="size">${formatSize(p.size)}</span>
-          </button>`)
-        .join("")}</div>`
-    : `<p class="group-empty">등록된 문제지가 없습니다.</p>`;
-
-  /* ---- 풀이 섹션: 탭(데스크탑) + 아코디언(모바일) ---- */
-  let solutionHtml;
-  if (!groups.length) {
-    solutionHtml = `<p class="group-empty">등록된 풀이가 없습니다.</p>`;
-  } else {
-    const tabs = groups
-      .map((g, gi) => `
-        <button class="group-tab" type="button" role="tab" id="gt-${gi}"
-                aria-controls="gp-${gi}" aria-selected="${gi === 0 ? "true" : "false"}"
-                tabindex="${gi === 0 ? "0" : "-1"}">
-          ${escapeHtml(g.group)}<span class="group-count-inline">${(g.items || []).length}</span>
-        </button>`)
-      .join("");
-
-    const panels = groups
-      .map((g, gi) => `
-        <div class="group-panel" id="gp-${gi}" role="tabpanel" aria-labelledby="gt-${gi}" ${gi === 0 ? "" : "hidden"}>
-          ${solutionGrid(g, gi)}
-        </div>`)
-      .join("");
-
-    const acc = groups
-      .map((g, gi) => `
-        <details class="group-acc" ${gi === 0 ? "open" : ""}>
-          <summary class="group-head">
-            <span>${escapeHtml(g.group)}</span>
-            <span class="group-count">${(g.items || []).length}</span>
-            ${icon("i-chevron-down", "icon-sm chevron")}
-          </summary>
-          ${solutionGrid(g, gi)}
-        </details>`)
-      .join("");
-
-    solutionHtml = `
-      <div class="group-tabs" role="tablist" aria-label="풀이 그룹">${tabs}</div>
-      ${panels}
-      <div class="group-accordion">${acc}</div>`;
+    return btn;
   }
 
-  return `
-    <button class="detail-back" type="button">${icon("i-arrow-left", "icon-sm")} 목록</button>
-    <div class="detail-grid">
-      <aside class="set-aside set-detail">
-        <h1 id="detail-title">${escapeHtml(set.title || set.id)}</h1>
-        <span class="card-subject aside-badge">${escapeHtml(subject)}</span>
-        ${tags ? `<div class="tags">${tags}</div>` : ""}
-        <p class="aside-summary">문제 ${pCount} · 풀이 ${sCount}</p>
-      </aside>
-      <div class="set-main set-detail">
-        <section>
-          <h2 class="section-heading">문제지</h2>
-          ${problemsHtml}
-        </section>
-        <section>
-          <h2 class="section-heading">풀이</h2>
-          ${solutionHtml}
-        </section>
-      </div>
-    </div>`;
-}
+  function updateChipState() {
+    for (const chip of els.groupFilters.querySelectorAll('.chip')) {
+      chip.setAttribute('aria-pressed', String(chip.dataset.group === state.activeGroup));
+    }
+  }
 
-function solutionGrid(group, gi) {
-  const items = group.items || [];
-  if (!items.length) return `<p class="group-empty">풀이 없음</p>`;
-  const tiles = items
-    .map((it, ii) => `
-      <button class="sol-tile" type="button" data-group="${gi}" data-item="${ii}"
-              aria-label="${escapeHtml(group.group)} ${escapeHtml(it.label)} 풀이 열기">
-        ${escapeHtml(it.label)}
-      </button>`)
-    .join("");
-  return `<div class="solution-grid">${tiles}</div>`;
-}
+  // ---- Filter + sort -----------------------------------------------------
+  function groupRank(group) {
+    const i = state.groupOrder.indexOf(group);
+    return i === -1 ? 999 : i;
+  }
 
-function wireDetail(set) {
-  const root = el.detailBody;
-
-  root.querySelector(".detail-back").addEventListener("click", closeDetail);
-
-  // 문제지 버튼
-  root.querySelectorAll("[data-problem]").forEach((btn) => {
-    const p = (set.problems || [])[Number(btn.dataset.problem)];
-    if (!p) return;
-    btn.addEventListener("click", () => openViewer(p.label || "문제지", p.pdf, btn));
-  });
-
-  // 풀이 타일
-  root.querySelectorAll(".sol-tile").forEach((tile) => {
-    const g = (set.solutionGroups || [])[Number(tile.dataset.group)];
-    const it = g && (g.items || [])[Number(tile.dataset.item)];
-    if (!it) return;
-    const title = `${g.group} ${it.label}`;
-    tile.addEventListener("click", () => openViewer(title, it.pdf, tile));
-  });
-
-  // 그룹 탭(데스크탑) — 클릭 + 화살표키
-  const tabs = [...root.querySelectorAll(".group-tab")];
-  const panels = [...root.querySelectorAll(".group-panel")];
-  function selectTab(idx) {
-    tabs.forEach((t, i) => {
-      const on = i === idx;
-      t.setAttribute("aria-selected", on ? "true" : "false");
-      t.tabIndex = on ? 0 : -1;
+  function getVisible() {
+    const q = state.query.trim().toLowerCase();
+    let list = state.questions.filter((item) => {
+      if (state.activeGroup !== 'all' && item.group !== state.activeGroup) return false;
+      if (!q) return true;
+      const hay = [
+        item.id,
+        item.group,
+        String(item.number),
+        `${item.group} ${item.number}`,
+        cleanText(item.text),
+        item.answer,
+        item.answerText,
+      ].filter(Boolean).join(' ').toLowerCase();
+      return hay.includes(q);
     });
-    panels.forEach((p, i) => { p.hidden = i !== idx; });
+
+    if (state.sortMode === 'number') {
+      list = list.slice().sort((a, b) =>
+        (a.number - b.number) || (groupRank(a.group) - groupRank(b.group)));
+    } else {
+      list = list.slice().sort((a, b) =>
+        (groupRank(a.group) - groupRank(b.group)) || (a.number - b.number));
+    }
+    return list;
   }
-  tabs.forEach((tab, i) => {
-    tab.addEventListener("click", () => selectTab(i));
-    tab.addEventListener("keydown", (e) => {
-      let ni = null;
-      if (e.key === "ArrowRight") ni = (i + 1) % tabs.length;
-      else if (e.key === "ArrowLeft") ni = (i - 1 + tabs.length) % tabs.length;
-      else if (e.key === "Home") ni = 0;
-      else if (e.key === "End") ni = tabs.length - 1;
-      if (ni === null) return;
-      e.preventDefault();
-      selectTab(ni);
-      tabs[ni].focus();
+
+  // ---- Render grid -------------------------------------------------------
+  function render() {
+    const list = getVisible();
+    const total = state.questions.length;
+
+    if (state.query.trim() || state.activeGroup !== 'all') {
+      els.resultCount.textContent = `${list.length}개 표시 · 전체 ${total}문항`;
+    } else {
+      els.resultCount.textContent = `총 ${total}문항`;
+    }
+
+    els.empty.hidden = true;
+    els.loadError.hidden = true;
+
+    if (list.length === 0) {
+      els.grid.replaceChildren();
+      els.noResults.hidden = false;
+      return;
+    }
+    els.noResults.hidden = true;
+
+    const frag = document.createDocumentFragment();
+    for (const q of list) frag.appendChild(makeCard(q));
+    els.grid.replaceChildren(frag);
+  }
+
+  function makeCard(q) {
+    const card = document.createElement('article');
+    card.className = 'card';
+    if (q.group) card.dataset.group = q.group;
+
+    const ans = answerBadgeText(q);
+    const numLabel = `${q.group} ${q.number}`;
+
+    // Header: group-number badge + (optional) answer badge
+    const head = document.createElement('div');
+    head.className = 'card-head';
+    head.innerHTML =
+      `<span class="badge badge-num">${escapeHTML(numLabel)}</span>` +
+      (ans ? `<span class="badge badge-answer">정답 ${escapeHTML(ans)}</span>` : '');
+    card.appendChild(head);
+
+    // Image thumbnail (lazy, clickable)
+    const figBtn = document.createElement('button');
+    figBtn.type = 'button';
+    figBtn.className = 'card-thumb';
+    figBtn.setAttribute('aria-label', `${numLabel} 문항 크게 보기`);
+    if (q.image) {
+      const img = document.createElement('img');
+      img.src = q.image;            // root-relative path, used as-is
+      img.alt = `${numLabel} 문항 이미지`;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.addEventListener('error', () => {
+        figBtn.classList.add('thumb-error');
+        figBtn.innerHTML = '<span class="thumb-fallback">이미지를 불러올 수 없습니다</span>';
+      });
+      figBtn.appendChild(img);
+    } else {
+      figBtn.classList.add('thumb-error');
+      figBtn.innerHTML = '<span class="thumb-fallback">이미지 없음</span>';
+    }
+    figBtn.addEventListener('click', () => openDetail(q, figBtn));
+    card.appendChild(figBtn);
+
+    // Footer: "풀이 보기" button
+    const foot = document.createElement('div');
+    foot.className = 'card-foot';
+    const view = document.createElement('button');
+    view.type = 'button';
+    view.className = 'btn primary btn-block';
+    view.innerHTML = '<span class="label">풀이 보기</span>';
+    view.addEventListener('click', () => openDetail(q, view));
+    foot.appendChild(view);
+    card.appendChild(foot);
+
+    return card;
+  }
+
+  // ---- Detail modal ------------------------------------------------------
+  function sourcePdfHref(q) {
+    const src = q.source || {};
+    if (!src.pdf) return null;
+    const page = src.page || 1;
+    return `${src.pdf}#page=${page}`;
+  }
+
+  function openDetail(q, triggerEl) {
+    state.lastFocused = triggerEl || document.activeElement;
+
+    const numLabel = `${q.group} ${q.number}`;
+    els.detailNum.textContent = numLabel;
+    els.detailTitle.textContent = `${numLabel} 문항 상세`;
+
+    const ans = answerBadgeText(q);
+    if (ans) {
+      els.detailAnswer.textContent = `정답 ${ans}`;
+      els.detailAnswer.hidden = false;
+    } else {
+      els.detailAnswer.hidden = true;
+    }
+
+    // Source PDF link (original problem page)
+    const href = sourcePdfHref(q);
+    if (href) {
+      els.detailSource.href = href;
+      els.detailSourceLabel.textContent = `원본 문제 PDF p.${(q.source && q.source.page) || 1}`;
+      els.detailSource.hidden = false;
+    } else {
+      els.detailSource.hidden = true;
+    }
+
+    // Question image (full size)
+    if (q.image) {
+      els.detailImage.src = q.image;
+      els.detailImage.alt = `${numLabel} 문항 이미지`;
+      els.detailImage.parentElement.hidden = false;
+    } else {
+      els.detailImage.removeAttribute('src');
+      els.detailImage.parentElement.hidden = true;
+    }
+
+    // Solution region
+    renderSolution(q);
+
+    // Show modal
+    els.detail.hidden = false;
+    document.body.classList.add('modal-open');
+    requestAnimationFrame(() => els.detailClose.focus());
+  }
+
+  function setSolutionContent(html) {
+    els.solutionContent.innerHTML = html;
+  }
+
+  function renderSolution(q) {
+    const md = q.solutionMd || null;
+    const pdf = q.solutionPdf || null;
+
+    // Reset original-PDF link
+    els.solutionPdfLink.hidden = true;
+    els.solutionPdfLink.removeAttribute('href');
+
+    if (md) {
+      // generated markdown is primary; offer original PDF link too if present
+      if (pdf) {
+        els.solutionPdfLink.href = pdf;
+        els.solutionPdfLink.hidden = false;
+      }
+      renderMarkdownSolution(md);
+      return;
+    }
+
+    if (pdf) {
+      // embed PDF + open/download actions
+      setSolutionContent(
+        '<div class="solution-pdf">' +
+          `<iframe class="solution-frame" src="${escapeHTML(pdf)}#view=FitH" ` +
+            'title="풀이 PDF 미리보기" loading="lazy"></iframe>' +
+          '<div class="solution-pdf-actions">' +
+            `<a class="btn ghost btn-sm" href="${escapeHTML(pdf)}" target="_blank" rel="noopener">` +
+              '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-external"/></svg>' +
+              '<span class="label">새 탭에서 열기</span></a>' +
+            `<a class="btn ghost btn-sm" href="${escapeHTML(pdf)}" download>` +
+              '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-download"/></svg>' +
+              '<span class="label">다운로드</span></a>' +
+          '</div>' +
+        '</div>'
+      );
+      return;
+    }
+
+    // nothing available
+    setSolutionContent('<p class="solution-empty">풀이 준비 중입니다.</p>');
+  }
+
+  async function renderMarkdownSolution(url) {
+    setSolutionContent('<p class="solution-loading">풀이를 불러오는 중…</p>');
+
+    if (state.mdCache.has(url)) {
+      injectMarkdownHTML(state.mdCache.get(url));
+      return;
+    }
+
+    try {
+      const res = await fetch(url, { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+
+      // marked may still be loading (deferred CDN); wait briefly if needed.
+      const ready = await waitFor(() => typeof window.marked !== 'undefined', 4000);
+      if (!ready) {
+        setSolutionContent('<p class="solution-empty">마크다운 렌더러를 불러오지 못했습니다. ' +
+          `<a href="${escapeHTML(url)}" target="_blank" rel="noopener">원문 보기</a></p>`);
+        return;
+      }
+      const parse = window.marked.parse || window.marked;
+      const html = parse(text, { gfm: true, breaks: false });
+      state.mdCache.set(url, html);
+      injectMarkdownHTML(html);
+    } catch (err) {
+      console.error('[EXAM Bank] solution markdown load failed:', err);
+      setSolutionContent('<p class="solution-empty">풀이 마크다운을 불러오지 못했습니다.</p>');
+    }
+  }
+
+  function injectMarkdownHTML(html) {
+    const wrap = document.createElement('div');
+    wrap.className = 'markdown-body';
+    wrap.innerHTML = html;   // marked output; source is our own generated MD
+    els.solutionContent.replaceChildren(wrap);
+    typesetMath(wrap);
+  }
+
+  function typesetMath(el) {
+    const MJ = window.MathJax;
+    if (MJ && typeof MJ.typesetPromise === 'function') {
+      MJ.typesetPromise([el]).catch((e) =>
+        console.warn('[EXAM Bank] MathJax typeset error:', e));
+    } else if (MJ && MJ.startup && MJ.startup.promise) {
+      MJ.startup.promise
+        .then(() => MJ.typesetPromise([el]))
+        .catch(() => {});
+    }
+    // If MathJax never loads, raw $...$ stays visible — acceptable fallback.
+  }
+
+  // Poll for a condition (used to await deferred CDN libs) without blocking.
+  function waitFor(predicate, timeoutMs) {
+    return new Promise((resolve) => {
+      if (predicate()) return resolve(true);
+      const start = Date.now();
+      const id = setInterval(() => {
+        if (predicate()) { clearInterval(id); resolve(true); }
+        else if (Date.now() - start > timeoutMs) { clearInterval(id); resolve(false); }
+      }, 60);
     });
-  });
-}
-
-/* ============================================================
-   PDF viewer modal
-   ============================================================ */
-function openViewer(title, path, trigger) {
-  viewerTrigger = trigger || null;
-  el.viewerTitle.textContent = title || "";
-  el.viewerOpen.href = path;
-  el.viewerDownload.href = path;
-  el.viewerFrame.src = path;
-  el.viewer.hidden = false;
-  document.body.style.overflow = "hidden";
-  el.viewerClose.focus();
-}
-
-function closeViewer() {
-  el.viewer.hidden = true;
-  el.viewerFrame.src = "about:blank";
-  // 상세가 아직 열려있으면 스크롤 잠금 유지
-  if (el.detail.hidden) document.body.style.overflow = "";
-  if (viewerTrigger && document.contains(viewerTrigger)) viewerTrigger.focus();
-  viewerTrigger = null;
-}
-
-/* ============================================================
-   Utils
-   ============================================================ */
-function formatSize(bytes) {
-  if (bytes == null || isNaN(bytes)) return "";
-  if (bytes < 1024) return bytes + " B";
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + " KB";
-  return (bytes / 1024 / 1024).toFixed(1) + " MB";
-}
-
-function escapeHtml(s) {
-  return String(s == null ? "" : s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-// user.github.io/<repo> 형태에서 저장소 링크를 추정합니다.
-function setRepoLink() {
-  const host = location.hostname; // user.github.io
-  const m = host.match(/^([^.]+)\.github\.io$/);
-  if (m) {
-    const user = m[1];
-    const seg = location.pathname.split("/").filter(Boolean);
-    const repo = seg.length ? seg[0] : `${user}.github.io`;
-    el.repoLink.href = `https://github.com/${user}/${repo}`;
-  } else {
-    el.repoLink.href = "https://github.com";
   }
-}
+
+  function closeDetail() {
+    if (els.detail.hidden) return;
+    els.detail.hidden = true;
+    document.body.classList.remove('modal-open');
+    // stop PDF iframe / free image memory
+    els.solutionContent.replaceChildren();
+    els.detailImage.removeAttribute('src');
+    // restore focus to the trigger
+    const target = state.lastFocused;
+    state.lastFocused = null;
+    if (target && typeof target.focus === 'function' && document.contains(target)) {
+      target.focus();
+    }
+  }
+
+  // Focus trap inside the modal panel.
+  function trapFocus(e) {
+    if (els.detail.hidden || e.key !== 'Tab') return;
+    const panel = els.detail.querySelector('.detail-panel');
+    const focusables = panel.querySelectorAll(
+      'a[href], button:not([disabled]), iframe, input, [tabindex]:not([tabindex="-1"])'
+    );
+    const visible = Array.from(focusables).filter((el) => !el.hidden && el.offsetParent !== null);
+    if (visible.length === 0) return;
+    const first = visible[0];
+    const last = visible[visible.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  }
+
+  // ---- Sort toggle -------------------------------------------------------
+  function toggleSort() {
+    state.sortMode = state.sortMode === 'group' ? 'number' : 'group';
+    const isNumber = state.sortMode === 'number';
+    els.sortLabel.textContent = isNumber ? '번호순' : '그룹·번호순';
+    els.sortToggle.setAttribute('aria-pressed', String(isNumber));
+    render();
+  }
+
+  // ---- Events ------------------------------------------------------------
+  function bindEvents() {
+    const onSearch = debounce(() => {
+      state.query = els.search.value;
+      els.searchClear.hidden = !els.search.value;
+      render();
+    }, 140);
+    els.search.addEventListener('input', onSearch);
+
+    els.searchClear.addEventListener('click', () => {
+      els.search.value = '';
+      state.query = '';
+      els.searchClear.hidden = true;
+      render();
+      els.search.focus();
+    });
+
+    els.sortToggle.addEventListener('click', toggleSort);
+
+    els.detailClose.addEventListener('click', closeDetail);
+    els.detailBackdrop.addEventListener('click', closeDetail);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (!els.detail.hidden) { e.preventDefault(); closeDetail(); }
+        else if (document.activeElement === els.search && els.search.value) {
+          els.search.value = ''; state.query = '';
+          els.searchClear.hidden = true; render();
+        }
+      }
+      trapFocus(e);
+    });
+  }
+
+  // ---- Init --------------------------------------------------------------
+  function init() {
+    bindEvents();
+    load();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
