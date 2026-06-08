@@ -25,15 +25,17 @@ exam-db-builder 스킬  ──►  data/db.json + data/images/*.png + data/solut
 
 ```
 exam-bank/
-├── index.html              # 단순 뷰어(검색·정렬·문항 상세)
+├── index.html              # 뷰어: 시험지 목록 → 시험지 선택 → 문제·풀이 (2단)
 ├── assets/
-│   ├── app.js              # db.json 을 읽어 렌더
+│   ├── app.js              # exams.json·db.json 을 읽어 렌더
 │   ├── style.css
-│   └── tokens.css          # 디자인 토큰
+│   └── tokens.css          # 디자인 토큰 (애플풍 Calm Mono · 화이트/블랙)
 ├── data/
-│   ├── db.json             # 문항 DB (스킬이 생성)
-│   ├── images/<id>.png     # 문항별 크롭 이미지
-│   └── solutions/<id>.(md|pdf)  # 풀이(생성 마크다운 또는 인제스트 PDF)
+│   ├── exams.json          # 시험지 목록 인덱스
+│   └── exams/<시험지id>/
+│       ├── db.json         # 그 시험지의 문항 DB
+│       ├── images/<id>.png # 문항별 크롭 이미지
+│       └── solutions/<id>.(md|pdf)  # 풀이(생성 마크다운 / 인제스트 PDF)
 ├── pdfs/<원본>.pdf          # 원본 문제 PDF
 └── .github/workflows/deploy.yml  # 정적 배포만(빌드 없음)
 ```

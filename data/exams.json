@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "exams": [
+    {
+      "id": "수능수학_2026",
+      "title": "2026 수능 수학영역",
+      "subject": "수학",
+      "groups": [
+        "공통",
+        "확률과통계",
+        "미적분",
+        "기하"
+      ],
+      "count": 46,
+      "source": {
+        "pdf": "pdfs/수학영역_문제지.pdf",
+        "pages": 40
+      },
+      "db": "data/exams/수능수학_2026/db.json"
+    }
+  ]
+}

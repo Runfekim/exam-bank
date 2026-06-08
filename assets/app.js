@@ -1,6 +1,9 @@
 /* ============================================================
-   EXAM Bank — 문항 단위 DB 뷰어 (Vanilla JS · no build step)
-   data/db.json (version 3) 을 읽어 문항 그리드 + 상세 모달을 렌더.
+   EXAM Bank — 정적 뷰어 (Vanilla JS · no build step)
+   2단 네비게이션:
+     #/            → 시험지 목록 (data/exams.json)
+     #/exam/<id>   → 문항 그리드 + 풀이 모달 (data/exams/<id>/db.json)
+   경로는 모두 "저장소 루트 기준" — src/href 에 그대로 사용한다.
    ============================================================ */
 'use strict';
 
@@ -9,10 +12,25 @@
   const $ = (sel, root = document) => root.querySelector(sel);
 
   const els = {
-    brandTitle: $('#brand-title'),
-    brandSub: $('#brand-sub'),
+    // chrome
+    searchWrap: $('#search-wrap'),
     search: $('#search'),
     searchClear: $('#search-clear'),
+    footerLine: $('#footer-line'),
+    main: $('#main'),
+
+    // view: list
+    viewList: $('#view-list'),
+    listTitle: $('#list-title'),
+    listSub: $('#list-sub'),
+    examList: $('#exam-list'),
+    listEmpty: $('#list-empty'),
+    listError: $('#list-error'),
+
+    // view: exam
+    viewExam: $('#view-exam'),
+    examEyebrow: $('#exam-eyebrow'),
+    examTitle: $('#exam-title'),
     groupFilters: $('#group-filters'),
     sortToggle: $('#sort-toggle'),
     sortLabel: $('#sort-label'),
@@ -20,9 +38,9 @@
     grid: $('#grid'),
     skeleton: $('#skeleton'),
     empty: $('#empty'),
-    loadError: $('#load-error'),
+    examError: $('#exam-error'),
     noResults: $('#no-results'),
-    footerLine: $('#footer-line'),
+
     // detail modal
     detail: $('#detail'),
     detailBackdrop: $('#detail-backdrop'),
@@ -39,14 +57,18 @@
 
   // ---- State -------------------------------------------------------------
   const state = {
-    db: null,
+    exams: null,             // exams.json -> array of exam metas
+    examIndex: new Map(),    // id -> exam meta
+    db: null,                // currently loaded exam db.json
+    dbId: null,              // id of currently loaded db
     questions: [],
-    groupOrder: [],          // db.groups order (canonical)
-    activeGroup: 'all',      // 'all' | group name
+    groupOrder: [],
+    activeGroup: 'all',
     query: '',
     sortMode: 'group',       // 'group' | 'number'
-    lastFocused: null,       // element to restore focus to after modal close
-    mdCache: new Map(),      // url -> rendered HTML string
+    lastFocused: null,
+    mdCache: new Map(),
+    dbCache: new Map(),      // id -> db.json (avoid refetch)
   };
 
   // ---- Utilities ---------------------------------------------------------
@@ -78,55 +100,231 @@
     };
   }
 
-  // The single answer to show on a badge: prefer the choice glyph (answer),
-  // fall back to answerText. Either may be empty.
+  // The answer to show on a badge: prefer the choice glyph (answer),
+  // fall back to answerText. If both present and different → "① · 1".
   function answerBadgeText(q) {
     const a = (q.answer || '').trim();
     const t = (q.answerText || '').trim();
-    if (a && t && a !== t) return `${a} (${t})`;
+    if (a && t && a !== t) return `${a} · ${t}`;
     return a || t || '';
   }
 
-  // ---- Data load ---------------------------------------------------------
-  async function load() {
-    try {
-      const res = await fetch('data/db.json', { cache: 'no-cache' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const db = await res.json();
-      state.db = db;
-      state.questions = Array.isArray(db.questions) ? db.questions : [];
-      state.groupOrder = Array.isArray(db.groups) ? db.groups.slice() : [];
-      hydrateChrome(db);
-      hideSkeleton();
+  // Compact summary of a group list, e.g. "공통 · 확률과통계 외 2".
+  function groupSummary(groups) {
+    if (!Array.isArray(groups) || groups.length === 0) return '';
+    if (groups.length <= 2) return groups.join(' · ');
+    return `${groups.slice(0, 2).join(' · ')} 외 ${groups.length - 2}`;
+  }
 
-      if (state.questions.length === 0) {
-        els.empty.hidden = false;
+  function svgUse(id, cls) {
+    return `<svg class="${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
+  }
+
+  // Poll for a condition (used to await deferred CDN libs) without blocking.
+  function waitFor(predicate, timeoutMs) {
+    return new Promise((resolve) => {
+      if (predicate()) return resolve(true);
+      const start = Date.now();
+      const id = setInterval(() => {
+        if (predicate()) { clearInterval(id); resolve(true); }
+        else if (Date.now() - start > timeoutMs) { clearInterval(id); resolve(false); }
+      }, 60);
+    });
+  }
+
+  // ============================================================
+  //  Routing  (#/  |  #/exam/<id>)
+  // ============================================================
+  function parseHash() {
+    const raw = (location.hash || '').replace(/^#/, '');
+    const parts = raw.split('/').filter(Boolean);  // e.g. ['exam','수능수학_2026']
+    if (parts[0] === 'exam' && parts[1]) {
+      return { name: 'exam', id: decodeURIComponent(parts.slice(1).join('/')) };
+    }
+    return { name: 'list' };
+  }
+
+  async function route() {
+    closeDetail();
+    const r = parseHash();
+
+    // Ensure the exam index is available for both routes.
+    if (!state.exams) {
+      await loadExams();
+    }
+
+    if (r.name === 'exam') {
+      // Unknown id → fall back to list.
+      if (state.exams && !state.examIndex.has(r.id)) {
+        location.replace('#/');
         return;
       }
-      buildGroupFilters();
-      render();
-    } catch (err) {
-      console.error('[EXAM Bank] failed to load db.json:', err);
-      hideSkeleton();
-      els.loadError.hidden = false;
+      showExamView();
+      await loadExam(r.id);
+    } else {
+      showListView();
     }
   }
 
+  function showView(which) {
+    const isList = which === 'list';
+    els.viewList.hidden = !isList;
+    els.viewExam.hidden = isList;
+    els.searchWrap.hidden = isList;            // search only on exam view
+    els.main.focus({ preventScroll: true });
+    window.scrollTo(0, 0);
+  }
+
+  function showListView() {
+    showView('list');
+    document.title = 'EXAM Bank';
+  }
+
+  function showExamView() {
+    showView('exam');
+  }
+
+  // ============================================================
+  //  Stage 1 — Exam list (data/exams.json)
+  // ============================================================
+  async function loadExams() {
+    try {
+      const res = await fetch('data/exams.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      const exams = Array.isArray(json.exams) ? json.exams : [];
+      state.exams = exams;
+      state.examIndex = new Map(exams.map((e) => [e.id, e]));
+      renderExamList();
+    } catch (err) {
+      console.error('[EXAM Bank] failed to load exams.json:', err);
+      state.exams = [];
+      state.examIndex = new Map();
+      els.listError.hidden = false;
+    }
+  }
+
+  function renderExamList() {
+    const exams = state.exams || [];
+    const total = exams.length;
+    els.listSub.textContent = total
+      ? `${total}개의 시험지`
+      : '';
+
+    els.listEmpty.hidden = total > 0;
+    if (total === 0) {
+      els.examList.replaceChildren();
+      return;
+    }
+
+    const frag = document.createDocumentFragment();
+    for (const exam of exams) frag.appendChild(makeExamCard(exam));
+    els.examList.replaceChildren(frag);
+  }
+
+  function makeExamCard(exam) {
+    const a = document.createElement('a');
+    a.className = 'exam-card';
+    a.href = `#/exam/${encodeURIComponent(exam.id)}`;
+
+    const meta = [
+      exam.subject ? escapeHTML(exam.subject) : null,
+      exam.count != null ? `${exam.count}문항` : null,
+    ].filter(Boolean).join(' · ');
+
+    const groups = groupSummary(exam.groups);
+
+    a.innerHTML =
+      '<div class="exam-card-body">' +
+        `<p class="exam-card-eyebrow">${escapeHTML(exam.subject || '시험지')}</p>` +
+        `<h2 class="exam-card-title">${escapeHTML(exam.title || exam.id)}</h2>` +
+        (meta ? `<p class="exam-card-meta">${meta}</p>` : '') +
+        (groups ? `<p class="exam-card-groups">${escapeHTML(groups)}</p>` : '') +
+      '</div>' +
+      `<span class="exam-card-arrow" aria-hidden="true">${svgUse('i-chevron-right', 'icon icon-sm')}</span>`;
+    return a;
+  }
+
+  // ============================================================
+  //  Stage 2 — Exam detail (data/exams/<id>/db.json)
+  // ============================================================
+  function resetExamView() {
+    state.activeGroup = 'all';
+    state.query = '';
+    state.sortMode = 'group';
+    els.search.value = '';
+    els.searchClear.hidden = true;
+    els.sortLabel.textContent = '그룹·번호순';
+    els.sortToggle.setAttribute('aria-pressed', 'false');
+    els.groupFilters.replaceChildren();
+    els.grid.replaceChildren();
+    els.resultCount.textContent = '';
+    els.empty.hidden = true;
+    els.examError.hidden = true;
+    els.noResults.hidden = true;
+  }
+
+  function showSkeleton() {
+    els.skeleton.hidden = false;
+    els.skeleton.style.display = '';
+  }
   function hideSkeleton() {
     els.skeleton.hidden = true;
     els.skeleton.style.display = 'none';
   }
 
-  function hydrateChrome(db) {
-    const title = db.title || 'EXAM Bank';
-    document.title = `${title} — EXAM Bank`;
-    els.brandTitle.textContent = title;
-    const sub = [db.subject, db.count != null ? `총 ${db.count}문항` : null]
-      .filter(Boolean).join(' · ');
-    els.brandSub.textContent = sub || '문항 보관소';
+  async function loadExam(id) {
+    resetExamView();
 
-    els.footerLine.textContent = [db.title, db.subject,
-      db.count != null ? `${db.count}문항` : null].filter(Boolean).join(' · ');
+    const meta = state.examIndex.get(id) || {};
+    // Show meta title immediately for snappy UX.
+    els.examTitle.textContent = meta.title || id;
+    els.examEyebrow.textContent = meta.subject || '';
+    document.title = `${meta.title || id} — EXAM Bank`;
+
+    // Cached db → render instantly.
+    if (state.dbCache.has(id)) {
+      hideSkeleton();
+      applyDb(id, state.dbCache.get(id));
+      return;
+    }
+
+    showSkeleton();
+    const dbPath = meta.db || `data/exams/${encodeURIComponent(id)}/db.json`;
+    try {
+      const res = await fetch(dbPath, { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const db = await res.json();
+      state.dbCache.set(id, db);
+      hideSkeleton();
+      // Ignore if the route changed while loading.
+      if (parseHash().id !== id) return;
+      applyDb(id, db);
+    } catch (err) {
+      console.error('[EXAM Bank] failed to load db.json:', err);
+      hideSkeleton();
+      els.examError.hidden = false;
+    }
+  }
+
+  function applyDb(id, db) {
+    state.db = db;
+    state.dbId = id;
+    state.questions = Array.isArray(db.questions) ? db.questions : [];
+    state.groupOrder = Array.isArray(db.groups) ? db.groups.slice() : [];
+
+    const title = db.title || (state.examIndex.get(id) || {}).title || id;
+    els.examTitle.textContent = title;
+    els.examEyebrow.textContent = [db.subject, db.count != null ? `${db.count}문항` : null]
+      .filter(Boolean).join(' · ');
+    document.title = `${title} — EXAM Bank`;
+
+    if (state.questions.length === 0) {
+      els.empty.hidden = false;
+      return;
+    }
+    buildGroupFilters();
+    renderGrid();
   }
 
   // ---- Group filter chips ------------------------------------------------
@@ -135,7 +333,6 @@
     for (const q of state.questions) {
       counts[q.group] = (counts[q.group] || 0) + 1;
     }
-    // Canonical order from db.groups, then any extra groups found in data.
     const groups = state.groupOrder.slice();
     for (const g of Object.keys(counts)) {
       if (!groups.includes(g)) groups.push(g);
@@ -163,7 +360,7 @@
     btn.addEventListener('click', () => {
       state.activeGroup = value;
       updateChipState();
-      render();
+      renderGrid();
     });
     return btn;
   }
@@ -208,7 +405,7 @@
   }
 
   // ---- Render grid -------------------------------------------------------
-  function render() {
+  function renderGrid() {
     const list = getVisible();
     const total = state.questions.length;
 
@@ -219,7 +416,7 @@
     }
 
     els.empty.hidden = true;
-    els.loadError.hidden = true;
+    els.examError.hidden = true;
 
     if (list.length === 0) {
       els.grid.replaceChildren();
@@ -241,15 +438,16 @@
     const ans = answerBadgeText(q);
     const numLabel = `${q.group} ${q.number}`;
 
-    // Header: group-number badge + (optional) answer badge
     const head = document.createElement('div');
     head.className = 'card-head';
     head.innerHTML =
       `<span class="badge badge-num">${escapeHTML(numLabel)}</span>` +
-      (ans ? `<span class="badge badge-answer">정답 ${escapeHTML(ans)}</span>` : '');
+      (ans
+        ? `<span class="badge badge-answer">${svgUse('i-check', 'icon icon-xs')}` +
+          `<span>${escapeHTML(ans)}</span></span>`
+        : '');
     card.appendChild(head);
 
-    // Image thumbnail (lazy, clickable)
     const figBtn = document.createElement('button');
     figBtn.type = 'button';
     figBtn.className = 'card-thumb';
@@ -272,13 +470,12 @@
     figBtn.addEventListener('click', () => openDetail(q, figBtn));
     card.appendChild(figBtn);
 
-    // Footer: "풀이 보기" button
     const foot = document.createElement('div');
     foot.className = 'card-foot';
     const view = document.createElement('button');
     view.type = 'button';
-    view.className = 'btn primary btn-block';
-    view.innerHTML = '<span class="label">풀이 보기</span>';
+    view.className = 'btn ghost btn-block';
+    view.innerHTML = '<span class="label">풀이 보기</span>' + svgUse('i-chevron-right', 'icon icon-sm');
     view.addEventListener('click', () => openDetail(q, view));
     foot.appendChild(view);
     card.appendChild(foot);
@@ -303,13 +500,13 @@
 
     const ans = answerBadgeText(q);
     if (ans) {
-      els.detailAnswer.textContent = `정답 ${ans}`;
+      els.detailAnswer.innerHTML = svgUse('i-check', 'icon icon-xs') +
+        `<span>정답 ${escapeHTML(ans)}</span>`;
       els.detailAnswer.hidden = false;
     } else {
       els.detailAnswer.hidden = true;
     }
 
-    // Source PDF link (original problem page)
     const href = sourcePdfHref(q);
     if (href) {
       els.detailSource.href = href;
@@ -319,7 +516,6 @@
       els.detailSource.hidden = true;
     }
 
-    // Question image (full size)
     if (q.image) {
       els.detailImage.src = q.image;
       els.detailImage.alt = `${numLabel} 문항 이미지`;
@@ -329,10 +525,8 @@
       els.detailImage.parentElement.hidden = true;
     }
 
-    // Solution region
     renderSolution(q);
 
-    // Show modal
     els.detail.hidden = false;
     document.body.classList.add('modal-open');
     requestAnimationFrame(() => els.detailClose.focus());
@@ -346,12 +540,10 @@
     const md = q.solutionMd || null;
     const pdf = q.solutionPdf || null;
 
-    // Reset original-PDF link
     els.solutionPdfLink.hidden = true;
     els.solutionPdfLink.removeAttribute('href');
 
     if (md) {
-      // generated markdown is primary; offer original PDF link too if present
       if (pdf) {
         els.solutionPdfLink.href = pdf;
         els.solutionPdfLink.hidden = false;
@@ -361,17 +553,16 @@
     }
 
     if (pdf) {
-      // embed PDF + open/download actions
       setSolutionContent(
         '<div class="solution-pdf">' +
           `<iframe class="solution-frame" src="${escapeHTML(pdf)}#view=FitH" ` +
             'title="풀이 PDF 미리보기" loading="lazy"></iframe>' +
           '<div class="solution-pdf-actions">' +
             `<a class="btn ghost btn-sm" href="${escapeHTML(pdf)}" target="_blank" rel="noopener">` +
-              '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-external"/></svg>' +
+              svgUse('i-external', 'icon icon-sm') +
               '<span class="label">새 탭에서 열기</span></a>' +
             `<a class="btn ghost btn-sm" href="${escapeHTML(pdf)}" download>` +
-              '<svg class="icon icon-sm" aria-hidden="true"><use href="#i-download"/></svg>' +
+              svgUse('i-download', 'icon icon-sm') +
               '<span class="label">다운로드</span></a>' +
           '</div>' +
         '</div>'
@@ -379,7 +570,6 @@
       return;
     }
 
-    // nothing available
     setSolutionContent('<p class="solution-empty">풀이 준비 중입니다.</p>');
   }
 
@@ -396,7 +586,6 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
 
-      // marked may still be loading (deferred CDN); wait briefly if needed.
       const ready = await waitFor(() => typeof window.marked !== 'undefined', 4000);
       if (!ready) {
         setSolutionContent('<p class="solution-empty">마크다운 렌더러를 불러오지 못했습니다. ' +
@@ -434,26 +623,12 @@
     // If MathJax never loads, raw $...$ stays visible — acceptable fallback.
   }
 
-  // Poll for a condition (used to await deferred CDN libs) without blocking.
-  function waitFor(predicate, timeoutMs) {
-    return new Promise((resolve) => {
-      if (predicate()) return resolve(true);
-      const start = Date.now();
-      const id = setInterval(() => {
-        if (predicate()) { clearInterval(id); resolve(true); }
-        else if (Date.now() - start > timeoutMs) { clearInterval(id); resolve(false); }
-      }, 60);
-    });
-  }
-
   function closeDetail() {
     if (els.detail.hidden) return;
     els.detail.hidden = true;
     document.body.classList.remove('modal-open');
-    // stop PDF iframe / free image memory
     els.solutionContent.replaceChildren();
     els.detailImage.removeAttribute('src');
-    // restore focus to the trigger
     const target = state.lastFocused;
     state.lastFocused = null;
     if (target && typeof target.focus === 'function' && document.contains(target)) {
@@ -485,7 +660,7 @@
     const isNumber = state.sortMode === 'number';
     els.sortLabel.textContent = isNumber ? '번호순' : '그룹·번호순';
     els.sortToggle.setAttribute('aria-pressed', String(isNumber));
-    render();
+    renderGrid();
   }
 
   // ---- Events ------------------------------------------------------------
@@ -493,7 +668,7 @@
     const onSearch = debounce(() => {
       state.query = els.search.value;
       els.searchClear.hidden = !els.search.value;
-      render();
+      renderGrid();
     }, 140);
     els.search.addEventListener('input', onSearch);
 
@@ -501,7 +676,7 @@
       els.search.value = '';
       state.query = '';
       els.searchClear.hidden = true;
-      render();
+      renderGrid();
       els.search.focus();
     });
 
@@ -512,20 +687,22 @@
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        if (!els.detail.hidden) { e.preventDefault(); closeDetail(); }
-        else if (document.activeElement === els.search && els.search.value) {
+        if (!els.detail.hidden) { e.preventDefault(); closeDetail(); return; }
+        if (document.activeElement === els.search && els.search.value) {
           els.search.value = ''; state.query = '';
-          els.searchClear.hidden = true; render();
+          els.searchClear.hidden = true; renderGrid();
         }
       }
       trapFocus(e);
     });
+
+    window.addEventListener('hashchange', route);
   }
 
   // ---- Init --------------------------------------------------------------
   function init() {
     bindEvents();
-    load();
+    route();   // resolves current hash (list or deep-linked exam)
   }
 
   if (document.readyState === 'loading') {
