@@ -23,7 +23,6 @@
       "image": "data/exams/수능수학_2026/images/공통-01.png",
       "answer": "①",
       "answerText": "1",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-01.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -41,7 +40,6 @@
       "image": "data/exams/수능수학_2026/images/공통-02.png",
       "answer": "④",
       "answerText": "13",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-02.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -59,7 +57,6 @@
       "image": "data/exams/수능수학_2026/images/공통-03.png",
       "answer": "⑤",
       "answerText": "5",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-03.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -77,7 +74,6 @@
       "image": "data/exams/수능수학_2026/images/공통-04.png",
       "answer": "③",
       "answerText": "3",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-04.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -95,7 +91,6 @@
       "image": "data/exams/수능수학_2026/images/공통-05.png",
       "answer": "③",
       "answerText": "8",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-05.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -113,7 +108,6 @@
       "image": "data/exams/수능수학_2026/images/공통-06.png",
       "answer": "②",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-06.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -131,7 +125,6 @@
       "image": "data/exams/수능수학_2026/images/공통-07.png",
       "answer": "⑤",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-07.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -149,7 +142,6 @@
       "image": "data/exams/수능수학_2026/images/공통-08.png",
       "answer": "①",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-08.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -167,7 +159,6 @@
       "image": "data/exams/수능수학_2026/images/공통-09.png",
       "answer": "④",
       "answerText": "14",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-09.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -185,7 +176,6 @@
       "image": "data/exams/수능수학_2026/images/공통-10.png",
       "answer": "③",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-10.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -203,7 +193,6 @@
       "image": "data/exams/수능수학_2026/images/공통-11.png",
       "answer": "③",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-11.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -221,7 +210,6 @@
       "image": "data/exams/수능수학_2026/images/공통-12.png",
       "answer": "②",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-12.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -239,7 +227,6 @@
       "image": "data/exams/수능수학_2026/images/공통-13.png",
       "answer": "⑤",
       "answerText": "49",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-13.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -257,7 +244,6 @@
       "image": "data/exams/수능수학_2026/images/공통-14.png",
       "answer": "④",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-14.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -275,7 +261,6 @@
       "image": "data/exams/수능수학_2026/images/공통-15.png",
       "answer": "④",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-15.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -293,7 +278,6 @@
       "image": "data/exams/수능수학_2026/images/공통-16.png",
       "answer": "",
       "answerText": "9",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-16.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -311,7 +295,6 @@
       "image": "data/exams/수능수학_2026/images/공통-17.png",
       "answer": "",
       "answerText": "16",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-17.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -329,7 +312,6 @@
       "image": "data/exams/수능수학_2026/images/공통-18.png",
       "answer": "",
       "answerText": "12",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-18.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -347,7 +329,6 @@
       "image": "data/exams/수능수학_2026/images/공통-19.png",
       "answer": "",
       "answerText": "15",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-19.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -365,7 +346,6 @@
       "image": "data/exams/수능수학_2026/images/공통-20.png",
       "answer": "",
       "answerText": "130",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-20.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -383,7 +363,6 @@
       "image": "data/exams/수능수학_2026/images/공통-21.png",
       "answer": "",
       "answerText": "65",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-21.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -401,7 +380,6 @@
       "image": "data/exams/수능수학_2026/images/공통-22.png",
       "answer": "",
       "answerText": "457",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/공통-22.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -419,7 +397,6 @@
       "image": "data/exams/수능수학_2026/images/확률과통계-23.png",
       "answer": "③",
       "answerText": "64",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/확률과통계-23.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -437,7 +414,6 @@
       "image": "data/exams/수능수학_2026/images/확률과통계-24.png",
       "answer": "①",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/확률과통계-24.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -455,7 +431,6 @@
       "image": "data/exams/수능수학_2026/images/확률과통계-25.png",
       "answer": "②",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/확률과통계-25.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -473,7 +448,6 @@
       "image": "data/exams/수능수학_2026/images/확률과통계-26.png",
       "answer": "⑤",
       "answerText": "5.5",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/확률과통계-26.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -491,7 +465,6 @@
       "image": "data/exams/수능수학_2026/images/확률과통계-27.png",
       "answer": "④",
       "answerText": "45",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/확률과통계-27.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -509,7 +482,6 @@
       "image": "data/exams/수능수학_2026/images/확률과통계-28.png",
       "answer": "②",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/확률과통계-28.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -527,7 +499,6 @@
       "image": "data/exams/수능수학_2026/images/확률과통계-29.png",
       "answer": "",
       "answerText": "977",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/확률과통계-29.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -545,7 +516,6 @@
       "image": "data/exams/수능수학_2026/images/확률과통계-30.png",
       "answer": "",
       "answerText": "262",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/확률과통계-30.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -563,7 +533,6 @@
       "image": "data/exams/수능수학_2026/images/미적분-23.png",
       "answer": "③",
       "answerText": "3",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/미적분-23.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -581,7 +550,6 @@
       "image": "data/exams/수능수학_2026/images/미적분-24.png",
       "answer": "④",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/미적분-24.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -599,7 +567,6 @@
       "image": "data/exams/수능수학_2026/images/미적분-25.png",
       "answer": "③",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/미적분-25.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -617,7 +584,6 @@
       "image": "data/exams/수능수학_2026/images/미적분-26.png",
       "answer": "①",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/미적분-26.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -635,7 +601,6 @@
       "image": "data/exams/수능수학_2026/images/미적분-27.png",
       "answer": "②",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/미적분-27.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -653,7 +618,6 @@
       "image": "data/exams/수능수학_2026/images/미적분-28.png",
       "answer": "⑤",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/미적분-28.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -671,7 +635,6 @@
       "image": "data/exams/수능수학_2026/images/미적분-29.png",
       "answer": "",
       "answerText": "97",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/미적분-29.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -689,7 +652,6 @@
       "image": "data/exams/수능수학_2026/images/미적분-30.png",
       "answer": "",
       "answerText": "11",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/미적분-30.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -707,7 +669,6 @@
       "image": "data/exams/수능수학_2026/images/기하-23.png",
       "answer": "③",
       "answerText": "3",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/기하-23.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -725,7 +686,6 @@
       "image": "data/exams/수능수학_2026/images/기하-24.png",
       "answer": "①",
       "answerText": "6",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/기하-24.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -743,7 +703,6 @@
       "image": "data/exams/수능수학_2026/images/기하-25.png",
       "answer": "⑤",
       "answerText": "5",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/기하-25.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -761,7 +720,6 @@
       "image": "data/exams/수능수학_2026/images/기하-26.png",
       "answer": "②",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/기하-26.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -779,7 +737,6 @@
       "image": "data/exams/수능수학_2026/images/기하-27.png",
       "answer": "④",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/기하-27.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -797,7 +754,6 @@
       "image": "data/exams/수능수학_2026/images/기하-28.png",
       "answer": "④",
       "answerText": "",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/기하-28.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -815,7 +771,6 @@
       "image": "data/exams/수능수학_2026/images/기하-29.png",
       "answer": "",
       "answerText": "360",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/기하-29.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",
@@ -833,7 +788,6 @@
       "image": "data/exams/수능수학_2026/images/기하-30.png",
       "answer": "",
       "answerText": "221",
-      "solutionPdf": "data/exams/수능수학_2026/solutions/기하-30.pdf",
       "solutionStatus": "generated",
       "source": {
         "pdf": "pdfs/수학영역_문제지.pdf",

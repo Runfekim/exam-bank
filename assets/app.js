@@ -51,7 +51,6 @@
     detailClose: $('#detail-close'),
     detailImage: $('#detail-image'),
     detailTitle: $('#detail-title'),
-    solutionPdfLink: $('#solution-pdf-link'),
     solutionContent: $('#solution-content'),
   };
 
@@ -537,39 +536,11 @@
   }
 
   function renderSolution(q) {
-    const md = q.solutionMd || null;
-    const pdf = q.solutionPdf || null;
-
-    els.solutionPdfLink.hidden = true;
-    els.solutionPdfLink.removeAttribute('href');
-
-    if (md) {
-      if (pdf) {
-        els.solutionPdfLink.href = pdf;
-        els.solutionPdfLink.hidden = false;
-      }
-      renderMarkdownSolution(md);
+    // 풀이는 마크다운(.md) 단일 포맷
+    if (q.solutionMd) {
+      renderMarkdownSolution(q.solutionMd);
       return;
     }
-
-    if (pdf) {
-      setSolutionContent(
-        '<div class="solution-pdf">' +
-          `<iframe class="solution-frame" src="${escapeHTML(pdf)}#view=FitH" ` +
-            'title="풀이 PDF 미리보기" loading="lazy"></iframe>' +
-          '<div class="solution-pdf-actions">' +
-            `<a class="btn ghost btn-sm" href="${escapeHTML(pdf)}" target="_blank" rel="noopener">` +
-              svgUse('i-external', 'icon icon-sm') +
-              '<span class="label">새 탭에서 열기</span></a>' +
-            `<a class="btn ghost btn-sm" href="${escapeHTML(pdf)}" download>` +
-              svgUse('i-download', 'icon icon-sm') +
-              '<span class="label">다운로드</span></a>' +
-          '</div>' +
-        '</div>'
-      );
-      return;
-    }
-
     setSolutionContent('<p class="solution-empty">풀이 준비 중입니다.</p>');
   }
 
