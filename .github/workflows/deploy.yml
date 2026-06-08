@@ -29,6 +29,8 @@ jobs:
         run: node scripts/build-catalog.mjs
 
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true   # Pages 가 꺼져 있으면 자동으로 켭니다 (수동 설정 불필요)
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
