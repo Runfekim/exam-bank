@@ -52,6 +52,9 @@
     detailImage: $('#detail-image'),
     detailTitle: $('#detail-title'),
     solutionContent: $('#solution-content'),
+
+    // header
+    themeToggle: $('#theme-toggle'),
   };
 
   // ---- State -------------------------------------------------------------
@@ -665,6 +668,7 @@
     });
 
     els.sortToggle.addEventListener('click', toggleSort);
+    els.themeToggle.addEventListener('click', toggleTheme);
 
     els.detailClose.addEventListener('click', closeDetail);
     els.detailBackdrop.addEventListener('click', closeDetail);
@@ -681,6 +685,13 @@
     });
 
     window.addEventListener('hashchange', route);
+  }
+
+  // 헤더 테마 토글 (라이트 ↔ 다크). data-theme 는 <head> 인라인 스크립트가 미리 설정.
+  function toggleTheme() {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('exambank.theme', next); } catch (e) {}
+    document.documentElement.dataset.theme = next;
   }
 
   // ---- Init --------------------------------------------------------------

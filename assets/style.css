@@ -433,7 +433,7 @@ button { font-family: inherit; }
   padding: 0;
   border: 0;
   border-block: 1px solid var(--line-faint);
-  background: var(--paper);   /* 문제 이미지 배경 항상 흰색 */
+  background: var(--surface);   /* 그리드 카드는 테마 따름 (흰 배경은 팝업 풀이뷰 전용) */
   cursor: pointer;
   appearance: none;
 }
@@ -441,7 +441,7 @@ button { font-family: inherit; }
   width: 100%;
   height: auto;
   object-fit: contain;
-  background: var(--paper);
+  background: var(--surface);
   transition: opacity var(--dur) var(--ease);
 }
 .card-thumb:hover img { opacity: 0.88; }
@@ -550,6 +550,30 @@ button { font-family: inherit; }
 /* ============================================================
    Footer
    ============================================================ */
+/* ---- Theme toggle (header) ---- */
+.theme-toggle {
+  margin-left: auto;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.theme-toggle:hover { background: var(--surface-hover); }
+.theme-toggle .icon { width: 18px; height: 18px; }
+/* 라이트=달(클릭→다크), 다크=해(클릭→라이트) */
+.theme-toggle .i-sun { display: none; }
+.theme-toggle .i-moon { display: inline; }
+:root[data-theme="dark"] .theme-toggle .i-sun { display: inline; }
+:root[data-theme="dark"] .theme-toggle .i-moon { display: none; }
+
 .site-footer {
   border-top: 1px solid var(--line);
   margin-top: var(--sp-8);
