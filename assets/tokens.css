@@ -1,0 +1,358 @@
+/* ============================================================
+   EXAM Bank — Design Tokens  (assets/tokens.css)
+   Direction: "Ink Editorial Archive" — synthesis of
+     C(semantic accent slots) + B(split bright/solid accent for AA)
+     + A(ink-navy editorial brand · serif wordmark · subject palette).
+
+   Build-step free · pure CSS variables · WCAG AA · Korean-first.
+   Load order (index.html AND admin/index.html):
+     <link rel="stylesheet" href="assets/tokens.css">   (this file FIRST)
+     <link rel="stylesheet" href="assets/style.css">
+
+   HOW SUBJECT COLOR WORKS (read this before styling components):
+   - Components NEVER reference a per-subject color. They only read the
+     SEMANTIC SLOT: --accent / --accent-hover / --accent-soft /
+     --accent-soft-ink / --accent-ink / --accent-ring.
+   - JS puts data-subject="<과목>" on the library card and on the set-detail
+     root. The [data-subject=...] rules below overwrite the slot.
+   - Unknown / mixed (whole library) → slot stays at the default ink-navy.
+   - This is why adding a new subject only edits THIS file, never components.
+
+   ACCESSIBILITY KEY IDEA (from direction B):
+   - A bright accent (e.g. #3F62C8) only passes AA-large against white, so it
+     is split into two tokens: --accent (bright; decorative fills, focus ring,
+     left card stripe, chips) and --accent-strong (deep; the ONLY value used as
+     a SOLID button fill behind white text). All solid-fill+text pairings are
+     verified >= 4.5:1.
+   ============================================================ */
+
+:root {
+  /* ---- Font families -------------------------------------------------- */
+  /* Body/UI = Pretendard (sans). Brand wordmark / set-detail H1 = serif. */
+  --font-sans:
+    "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Segoe UI", Roboto, "Noto Sans KR",
+    "Helvetica Neue", system-ui, sans-serif;
+  --font-serif:
+    "Noto Serif KR", Georgia, "Times New Roman", "Nanum Myeongjo",
+    "Apple SD Gothic Neo", serif;
+  --font-mono:
+    ui-monospace, "SFMono-Regular", "SF Mono", "JetBrains Mono",
+    "D2Coding", Menlo, Consolas, monospace;
+
+  /* ---- Type scale (minor third ~1.2, base 16px) ----------------------- */
+  --fs-2xs: 11px;    /* tags, micro labels */
+  --fs-xs:  12.5px;  /* meta, counts, size */
+  --fs-sm:  13.5px;  /* chips, buttons, secondary body */
+  --fs-md:  15px;    /* base body */
+  --fs-lg:  17px;    /* card title, subheads */
+  --fs-xl:  21px;    /* section heading */
+  --fs-2xl: 26px;    /* set-detail title (serif) */
+  --fs-3xl: 32px;    /* hero / brand wordmark (serif) */
+
+  --lh-tight: 1.3;   /* large titles */
+  --lh-snug:  1.45;  /* subheads / list rows */
+  --lh-base:  1.65;  /* Korean body — generous */
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --ls-tight: -0.01em;  /* headings >= 18px only */
+  --ls-normal: 0;
+  --ls-wide: 0.02em;    /* tiny labels / badges */
+
+  /* ---- Neutral / ink ramp (light) ------------------------------------- */
+  --ink-900: #131C2E;
+  --ink-800: #1B2A4A;  /* brand navy · default text */
+  --ink-700: #2C3A57;
+  --ink-600: #3D4A66;
+  --ink-500: #545E70;  /* muted text — 6.0:1 on white (AA) */
+  --ink-400: #828B99;
+  --ink-300: #AEB5C0;
+  --ink-200: #D7DBE2;
+  --ink-150: #E4E7ED;
+  --ink-100: #EDEFF3;
+  --ink-50:  #F4F5F8;
+
+  /* ---- Surfaces / canvas ---------------------------------------------- */
+  --bg:            #FAF8F4;  /* warm paper canvas */
+  --bg-subtle:     #F1EEE8;  /* inset wells, tag bg, table zebra */
+  --surface:       #FFFFFF;  /* cards / header / modal bar */
+  --surface-2:     #FBFAF8;  /* nested surface inside cards */
+  --surface-hover: #F4F2EC;  /* row & ghost-button hover */
+  --surface-raised:#FFFFFF;  /* modal / popover panel */
+  --overlay:       rgba(19, 28, 46, 0.55);  /* modal backdrop */
+
+  /* ---- Text roles ----------------------------------------------------- */
+  --text:        var(--ink-800);   /* 12.8:1 on bg / 13.6:1 on surface (AAA) */
+  --text-strong: var(--ink-900);
+  --text-muted:  var(--ink-500);   /* 6.0:1 on surface (AA) */
+  --text-faint:  var(--ink-400);   /* decorative / large only */
+
+  /* ---- Lines / borders ------------------------------------------------ */
+  --line:        #E5E2DB;  /* warm hairline */
+  --line-strong: #D5D1C8;  /* input borders, dividers */
+  --line-faint:  #EFEDE7;
+
+  /* ---- Brand (= ink navy, restrained) --------------------------------- */
+  --brand:        #1B2A4A;
+  --brand-hover:  #233660;
+  --brand-active: #142038;
+  --brand-soft:   #EAEDF4;
+  --brand-on-soft:#1B2A4A;  /* ~12:1 on brand-soft */
+
+  /* ====================================================================
+     SEMANTIC ACCENT SLOT  (subjects overwrite this; default = ink navy)
+     Components reference ONLY these six variables for "the active accent".
+     ==================================================================== */
+  --accent:        #3F62C8;  /* bright: decorative, stripe, chips, focus */
+  --accent-strong: #324FA6;  /* deep: SOLID fill behind white text — 5.2:1 */
+  --accent-hover:  #2B458F;  /* solid-fill hover */
+  --accent-soft:   #EAEDFB;  /* tint background */
+  --accent-soft-ink:#2A3F86;  /* text on --accent-soft — 6.8:1 (AA) */
+  --accent-ink:    #FFFFFF;  /* text on the SOLID fill (light = white) */
+  --accent-ring:   rgba(63, 98, 200, 0.38);
+
+  /* ---- Semantic: problem (= accent) vs solution (calm sage green) ------ */
+  --problem:        var(--accent-strong);  /* 문제지 primary fill */
+  --problem-hover:  var(--accent-hover);
+  --problem-ink:    var(--accent-ink);
+
+  --solution:        #2E6B4F;  /* solid fill, white text 5.0:1 (AA) */
+  --solution-hover:  #255A42;
+  --solution-soft:   #E6F0EA;  /* tile / soft-button bg */
+  --solution-soft-ink:#235740; /* text on --solution-soft — 7.1:1 (AAA) */
+  --solution-ink:    #FFFFFF;
+
+  /* ---- Status --------------------------------------------------------- */
+  --success:      #2E6B4F;
+  --success-soft: #E6F0EA;
+  --success-ink:  #235740;
+  --warn:         #9A6B12;  /* burnt amber — 5.0:1 on white (AA) */
+  --warn-soft:    #FBF1DC;
+  --warn-ink:     #7C560E;
+  --danger:       #B23A3A;  /* solid fill, white text 4.9:1 (AA) */
+  --danger-hover: #9E3131;
+  --danger-soft:  #F8E7E5;
+  --danger-ink:   #8F2B2B;  /* text on --danger-soft — 6.0:1 (AA) */
+  --info:         #2C5578;
+  --info-soft:    #E5EDF4;
+  --info-ink:     #234763;
+
+  /* ====================================================================
+     SUBJECT PALETTE — each is split (bright / strong / soft / soft-ink).
+     Mapped onto the slot via [data-subject="..."] rules below.
+     ==================================================================== */
+  --subj-math:        #3F62C8;  --subj-math-strong:    #324FA6;  --subj-math-hover:    #2B458F;  --subj-math-soft:    #EAEDFB;  --subj-math-soft-ink:    #2A3F86;  --subj-math-ring:    rgba(63,98,200,.38);   /* 수학 indigo */
+  --subj-korean:      #9B2D4A;  --subj-korean-strong:  #8A2641;  --subj-korean-hover:  #761E36;  --subj-korean-soft:  #F8E7EC;  --subj-korean-soft-ink:  #862440;  --subj-korean-ring:  rgba(155,45,74,.38);   /* 국어 burgundy */
+  --subj-english:     #1F6F73;  --subj-english-strong: #1A6064;  --subj-english-hover: #155053;  --subj-english-soft: #E2F0F0;  --subj-english-soft-ink: #195A5D;  --subj-english-ring: rgba(31,111,115,.38);  /* 영어 teal */
+  --subj-science:     #6A3FA0;  --subj-science-strong: #5A3489;  --subj-science-hover: #4C2C74;  --subj-science-soft: #EEE7F6;  --subj-science-soft-ink: #58348A;  --subj-science-ring: rgba(106,63,160,.38);  /* 과학 violet */
+  --subj-social:      #93591B;  --subj-social-strong:  #7C4A15;  --subj-social-hover:  #693F11;  --subj-social-soft:  #F6ECDA;  --subj-social-soft-ink:  #7C4A15;  --subj-social-ring:  rgba(147,89,27,.38);   /* 사회/한국사 amber */
+  --subj-etc:         #4A5568;  --subj-etc-strong:     #3D4757;  --subj-etc-hover:     #333C4A;  --subj-etc-soft:     #ECEEF1;  --subj-etc-soft-ink:     #3A4456;  --subj-etc-ring:     rgba(74,85,104,.38);   /* 기타 slate */
+
+  /* ---- Radius --------------------------------------------------------- */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 12px;   /* button, card default */
+  --r-lg: 16px;   /* large card, form card */
+  --r-xl: 20px;   /* modal panel, hero */
+  --r-pill: 999px;
+
+  /* ---- Spacing (4px base, 8pt rhythm) --------------------------------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* ---- Elevation (restrained · 3 + modal) ----------------------------- */
+  --shadow-xs:
+    0 1px 2px rgba(19, 28, 46, 0.04);
+  --shadow-sm:
+    0 1px 2px rgba(19, 28, 46, 0.05),
+    0 1px 1px rgba(19, 28, 46, 0.04);
+  --shadow-md:
+    0 1px 2px rgba(19, 28, 46, 0.05),
+    0 6px 18px rgba(19, 28, 46, 0.07);
+  --shadow-lg:
+    0 12px 32px rgba(19, 28, 46, 0.12),
+    0 2px 6px rgba(19, 28, 46, 0.06);
+  --shadow-modal:
+    0 24px 64px rgba(8, 12, 22, 0.28);
+  --shadow-focus:
+    0 0 0 2px var(--surface), 0 0 0 4px var(--accent-ring);
+
+  /* ---- Layout --------------------------------------------------------- */
+  --container: 1120px;
+  --container-narrow: 760px;
+  --header-h: 64px;
+  --tap-min: 44px;  /* minimum touch target — enforce everywhere */
+
+  /* ---- Motion --------------------------------------------------------- */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 120ms;
+  --dur: 180ms;
+  --dur-slow: 260ms;
+
+  /* ---- Z-index scale (no magic numbers) ------------------------------- */
+  --z-base: 1;
+  --z-header: 20;
+  --z-sticky: 30;
+  --z-dropdown: 40;
+  --z-overlay: 100;  /* modal backdrop */
+  --z-modal: 110;    /* modal panel */
+  --z-toast: 120;    /* admin toasts */
+
+  color-scheme: light;
+}
+
+/* ============================================================
+   SUBJECT MAPPING (light) — overwrite the semantic accent slot.
+   JS sets data-subject to the Korean subject string from catalog.json.
+   Science covers physics/chem/bio/earth; social covers 한국사.
+   Anything else falls back to :root default (ink navy).
+   ============================================================ */
+[data-subject="수학"] {
+  --accent: var(--subj-math); --accent-strong: var(--subj-math-strong); --accent-hover: var(--subj-math-hover);
+  --accent-soft: var(--subj-math-soft); --accent-soft-ink: var(--subj-math-soft-ink); --accent-ring: var(--subj-math-ring);
+}
+[data-subject="국어"] {
+  --accent: var(--subj-korean); --accent-strong: var(--subj-korean-strong); --accent-hover: var(--subj-korean-hover);
+  --accent-soft: var(--subj-korean-soft); --accent-soft-ink: var(--subj-korean-soft-ink); --accent-ring: var(--subj-korean-ring);
+}
+[data-subject="영어"] {
+  --accent: var(--subj-english); --accent-strong: var(--subj-english-strong); --accent-hover: var(--subj-english-hover);
+  --accent-soft: var(--subj-english-soft); --accent-soft-ink: var(--subj-english-soft-ink); --accent-ring: var(--subj-english-ring);
+}
+[data-subject="과학"],
+[data-subject="물리"],
+[data-subject="화학"],
+[data-subject="생명과학"],
+[data-subject="지구과학"] {
+  --accent: var(--subj-science); --accent-strong: var(--subj-science-strong); --accent-hover: var(--subj-science-hover);
+  --accent-soft: var(--subj-science-soft); --accent-soft-ink: var(--subj-science-soft-ink); --accent-ring: var(--subj-science-ring);
+}
+[data-subject="사회"],
+[data-subject="한국사"] {
+  --accent: var(--subj-social); --accent-strong: var(--subj-social-strong); --accent-hover: var(--subj-social-hover);
+  --accent-soft: var(--subj-social-soft); --accent-soft-ink: var(--subj-social-soft-ink); --accent-ring: var(--subj-social-ring);
+}
+[data-subject="기타"] {
+  --accent: var(--subj-etc); --accent-strong: var(--subj-etc-strong); --accent-hover: var(--subj-etc-hover);
+  --accent-soft: var(--subj-etc-soft); --accent-soft-ink: var(--subj-etc-soft-ink); --accent-ring: var(--subj-etc-ring);
+}
+
+/* ============================================================
+   ADMIN — operational tool. Pin the slot to neutral slate so the
+   admin UI is never tinted by a subject. Put class .admin on <body>.
+   Subject still shows via .badge/.chip that read subject vars directly.
+   ============================================================ */
+.admin {
+  --accent: var(--subj-etc); --accent-strong: var(--subj-etc-strong); --accent-hover: var(--subj-etc-hover);
+  --accent-soft: var(--subj-etc-soft); --accent-soft-ink: var(--subj-etc-soft-ink); --accent-ring: var(--subj-etc-ring);
+  --problem: var(--subj-etc-strong); --problem-hover: var(--subj-etc-hover);
+}
+
+/* ============================================================
+   DARK MODE — "ink steeped into navy charcoal" (no pure black).
+   Bright accents are lifted; SOLID fills become bright with DARK ink
+   text (--accent-ink flips to near-black) to keep AA on dark surfaces.
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:            #0F1420;
+    --bg-subtle:     #0B1019;
+    --surface:       #161D2B;
+    --surface-2:     #1B2334;
+    --surface-hover: #1E2738;
+    --surface-raised:#1C2436;
+    --overlay:       rgba(5, 8, 14, 0.66);
+
+    --text:        #E8ECF3;   /* 12.9:1 on surface (AAA) */
+    --text-strong: #F4F6FA;
+    --text-muted:  #9AA7BD;   /* 6.1:1 on surface (AA) */
+    --text-faint:  #6F7C92;
+
+    --line:        #283146;
+    --line-strong: #36405A;
+    --line-faint:  #1F2738;
+
+    --brand:        #8FA6E0;
+    --brand-hover:  #A4B7E9;
+    --brand-active: #7B93D4;
+    --brand-soft:   #1E2740;
+    --brand-on-soft:#B7C5EC;
+
+    /* Default slot (no subject) — lifted navy, dark ink on solid fill */
+    --accent:        #8FA6E0;
+    --accent-strong: #8FA6E0;  /* solid fill is bright in dark */
+    --accent-hover:  #A4B7E9;
+    --accent-soft:   #1E2740;
+    --accent-soft-ink:#B7C5EC;  /* 8.5:1 on accent-soft */
+    --accent-ink:    #0F1420;   /* DARK text on bright solid fill — ~9:1 */
+    --accent-ring:   rgba(143, 166, 224, 0.45);
+
+    --problem:        var(--accent-strong);
+    --problem-hover:  var(--accent-hover);
+    --problem-ink:    var(--accent-ink);
+
+    --solution:        #5FB489;
+    --solution-hover:  #74C29B;
+    --solution-soft:   #16271F;
+    --solution-soft-ink:#7FCBA3;
+    --solution-ink:    #0F1420;
+
+    --success:      #5FB489;
+    --success-soft: #16271F;
+    --success-ink:  #7FCBA3;
+    --warn:         #E0B25A;
+    --warn-soft:    #2C2413;
+    --warn-ink:     #E6C384;
+    --danger:       #E98080;
+    --danger-hover: #F09898;
+    --danger-soft:  #2E1A1A;
+    --danger-ink:   #F0A3A3;
+    --info:         #79AAD6;
+    --info-soft:    #15212E;
+    --info-ink:     #9FC3E2;
+
+    /* Subject palette (dark) — lifted brights, dark ink on solid fill */
+    --subj-math:        #8C9CEC;  --subj-math-strong:    #8C9CEC;  --subj-math-hover:    #A6B2F0;  --subj-math-soft:    #1B2140;  --subj-math-soft-ink:    #A6B2F0;  --subj-math-ring:    rgba(140,156,236,.45);
+    --subj-korean:      #E490A8;  --subj-korean-strong:  #E490A8;  --subj-korean-hover:  #ECA8BC;  --subj-korean-soft:  #2E1A22;  --subj-korean-soft-ink:  #ECA8BC;  --subj-korean-ring:  rgba(228,144,168,.45);
+    --subj-english:     #5FBDBF;  --subj-english-strong: #5FBDBF;  --subj-english-hover: #82CDCE;  --subj-english-soft: #102A2B;  --subj-english-soft-ink: #82CDCE;  --subj-english-ring: rgba(95,189,191,.45);
+    --subj-science:     #B795E6;  --subj-science-strong: #B795E6;  --subj-science-hover: #C7ADEC;  --subj-science-soft: #221A33;  --subj-science-soft-ink: #C7ADEC;  --subj-science-ring: rgba(183,149,230,.45);
+    --subj-social:      #DDB061;  --subj-social-strong:  #DDB061;  --subj-social-hover:  #E6C384;  --subj-social-soft:  #2A2113;  --subj-social-soft-ink:  #E6C384;  --subj-social-ring:  rgba(221,176,97,.45);
+    --subj-etc:         #9AA7BD;  --subj-etc-strong:     #9AA7BD;  --subj-etc-hover:     #B4BECE;  --subj-etc-soft:     #1F2738;  --subj-etc-soft-ink:     #B4BECE;  --subj-etc-ring:     rgba(154,167,189,.45);
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.7);
+    --shadow-focus: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent-ring);
+
+    color-scheme: dark;
+  }
+
+  /* In dark, every subject solid fill is bright → dark ink on it. */
+  [data-subject] { --accent-ink: #0F1420; }
+}
+
+/* ============================================================
+   Accessibility: honour reduced-motion everywhere.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
