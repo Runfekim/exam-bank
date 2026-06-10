@@ -44,6 +44,13 @@
         <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
         <path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h6"/>
       </symbol>
+      <symbol id="i-image" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="16" rx="2"/>
+        <circle cx="8.5" cy="9.5" r="1.5"/><path d="m21 16-5-5L5 20"/>
+      </symbol>
+      <symbol id="i-text" viewBox="0 0 24 24">
+        <path d="M5 6h14"/><path d="M5 12h14"/><path d="M5 18h9"/>
+      </symbol>
       <symbol id="i-external" viewBox="0 0 24 24">
         <path d="M14 4h6v6"/><path d="M20 4 10 14"/>
         <path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/>
@@ -101,6 +108,15 @@
         </button>
       </div>
 
+      <!-- 로컬 어드민 진입 (localhost 에서만 app.js 가 노출) -->
+      <a id="admin-link" class="theme-toggle" href="admin/" title="관리자(로컬)" aria-label="관리자 페이지" hidden>
+        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none"
+             stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>
+        </svg>
+      </a>
+
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="라이트·다크 테마 전환" title="테마 전환">
         <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
         <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
@@ -122,6 +138,16 @@
       </div>
 
       <div class="exam-list" id="exam-list" aria-label="시험지 목록"></div>
+
+      <!-- 전체(교차) 검색 결과 — 홈에서 검색 시 모든 시험의 문항을 가로질러 표시 -->
+      <section class="global-results" id="global-results" hidden aria-label="검색 결과">
+        <p class="count" id="global-count" aria-live="polite"></p>
+        <div class="gresult-list" id="gresult-list"></div>
+      </section>
+      <div class="empty" id="global-empty" hidden>
+        <h2>검색 결과가 없어요</h2>
+        <p>다른 키워드(본문·정답·번호)나 영문 표현으로 다시 시도해 보세요.</p>
+      </div>
 
       <div class="empty" id="list-empty" hidden>
         <h2>등록된 시험지가 없어요</h2>
@@ -223,9 +249,27 @@
       <h2 class="visually-hidden" id="detail-title">문항 상세</h2>
 
       <div class="detail-body" id="detail-body">
-        <figure class="detail-figure">
+        <!-- 보기 전환: 원본 크롭 이미지 ↔ 텍스트(모던 카드). 둘 다 있을 때만 노출 -->
+        <div class="qview-seg" id="qview-seg" role="group" aria-label="문항 보기 방식" hidden>
+          <button type="button" class="qview-opt" data-mode="image" aria-pressed="false">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-image"/></svg>
+            <span>원본 이미지</span>
+          </button>
+          <button type="button" class="qview-opt" data-mode="text" aria-pressed="true">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-text"/></svg>
+            <span>텍스트</span>
+          </button>
+        </div>
+
+        <figure class="detail-figure" id="detail-figure">
           <img id="detail-image" alt="" />
         </figure>
+
+        <!-- 텍스트 전사형 문항: 모던 카드 본문 렌더 -->
+        <section class="qbody" id="detail-qbody" hidden aria-labelledby="qbody-heading">
+          <h3 id="qbody-heading" class="visually-hidden">문제</h3>
+          <div id="detail-qbody-content" class="qbody-content"></div>
+        </section>
 
         <section class="solution" aria-labelledby="solution-heading">
           <div class="solution-head">

@@ -4,4 +4,15 @@ node_modules/
 Thumbs.db
 
 # 로컬 미리보기 스크린샷
-.preview-*.png
+.preview-*
+
+# 원본 시험 PDF — 로컬 어드민에만 보관, GitHub 미포함 (저작권/용량)
+pdfs/
+
+# docling — GitHub 클론(vendor)과 파이썬 가상환경, 레이아웃 추출 캐시 (로컬 전용)
+vendor/
+tools/.venv/
+*.docling.json
+
+# 로컬 검색 DB(SQLite) — 공개 사이트는 data/search-index.json(정적)만 사용
+data/*.db

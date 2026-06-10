@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXAM Bank · 관리자</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('exambank.theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = t;
+      } catch (e) { document.documentElement.dataset.theme = 'light'; }
+    })();
+  </script>
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="adm-header">
+    <div class="adm-wrap adm-header-inner">
+      <div class="adm-brand">
+        <span class="adm-logo">EXAM Bank</span>
+        <span class="adm-tag">관리자 · 로컬</span>
+      </div>
+      <a class="adm-btn ghost" href="../" title="메인 뷰어로">뷰어로 →</a>
+    </div>
+  </header>
+
+  <main class="adm-wrap adm-main" id="main">
+    <!-- 스킬 미발견 경고 -->
+    <div id="skill-warn" class="adm-banner warn" hidden>
+      ⚠️ 빌더 스킬(<code>exam-db-builder</code>)을 찾을 수 없습니다. 등록 기능이 동작하지 않습니다.
+      <code>~/.claude/skills/exam-db-builder</code> 설치를 확인하세요.
+    </div>
+
+    <!-- 요약 -->
+    <section class="adm-summary" id="summary">
+      <div class="adm-stat"><span class="adm-stat-num" id="sum-exams">–</span><span class="adm-stat-label">시험지</span></div>
+      <div class="adm-stat"><span class="adm-stat-num" id="sum-questions">–</span><span class="adm-stat-label">문항</span></div>
+      <div class="adm-stat"><span class="adm-stat-num" id="sum-pending">–</span><span class="adm-stat-label">미풀이</span></div>
+    </section>
+
+    <!-- 새 시험 등록 -->
+    <section class="adm-card">
+      <h2 class="adm-h2">새 시험 등록</h2>
+      <p class="adm-help">PDF를 올리면 문항 분해 · 이미지 크롭까지만 합니다. <b>풀이는 미풀이(pending)</b>로 남고, 풀이는 Claude(스킬)에게 따로 요청합니다.</p>
+
+      <div id="dropzone" class="adm-drop" tabindex="0">
+        <input id="file-input" type="file" accept="application/pdf,.pdf" hidden>
+        <div class="adm-drop-inner">
+          <strong>PDF를 여기로 드래그</strong> 하거나 클릭해서 선택
+          <span class="adm-drop-sub">업로드된 PDF는 로컬 <code>pdfs/</code> 에만 저장됩니다 (GitHub 미포함)</span>
+        </div>
+      </div>
+
+      <div class="adm-form">
+        <label class="adm-field">
+          <span>대상 PDF</span>
+          <select id="pdf-select"><option value="">— PDF 선택 —</option></select>
+        </label>
+        <label class="adm-field">
+          <span>제목</span>
+          <input id="f-title" type="text" placeholder="예: 2026 수능 수학영역">
+        </label>
+        <label class="adm-field adm-field-sm">
+          <span>과목</span>
+          <input id="f-subject" type="text" value="수학">
+        </label>
+        <label class="adm-field adm-field-sm">
+          <span>examId <em>(선택)</em></span>
+          <input id="f-examid" type="text" placeholder="비우면 제목에서 자동">
+        </label>
+      </div>
+
+      <div class="adm-actions">
+        <button id="btn-register" class="adm-btn primary" type="button">등록 (빌드)</button>
+      </div>
+      <pre id="build-log" class="adm-log" hidden></pre>
+    </section>
+
+    <!-- 등록 현황 -->
+    <section class="adm-card">
+      <div class="adm-card-head">
+        <h2 class="adm-h2">등록 현황 · 풀이 여부</h2>
+        <button id="btn-refresh" class="adm-btn ghost sm" type="button">새로고침</button>
+      </div>
+      <div id="exam-list" class="adm-exam-list"></div>
+      <p id="exam-empty" class="adm-help" hidden>아직 등록된 시험이 없습니다.</p>
+    </section>
+
+    <!-- 미등록 PDF -->
+    <section class="adm-card" id="unreg-card" hidden>
+      <h2 class="adm-h2">미등록 PDF</h2>
+      <div id="unreg-list" class="adm-unreg-list"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="adm-toast" hidden></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

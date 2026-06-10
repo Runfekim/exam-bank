@@ -62,6 +62,22 @@ git add -A && git commit -m "update exam db" && git push
 
 > 의존: `brew install poppler`, `pip3 install pillow` (스킬 실행 환경 = 로컬. 배포 워크플로는 정적 배포만 한다.)
 
+### 스캔 PDF (텍스트 레이어 없음) — docling 엔진
+
+텍스트 레이어가 없는 스캔 시험지는 poppler 로 문항 검출이 불가능하다. 이때 빌더는
+[docling](https://github.com/docling-project/docling)(레이아웃 분석 + macOS Vision OCR)으로
+자동 전환한다(`--engine auto` 기본). 로컬 1회 설치:
+
+```bash
+git clone --depth 1 https://github.com/docling-project/docling vendor/docling
+/opt/homebrew/bin/python3.13 -m venv tools/.venv
+tools/.venv/bin/pip install -e "./vendor/docling[convert-core,format-pdf,models-local,feat-ocr-mac,format-office,format-web,format-email,format-latex,cli]"
+```
+
+- `vendor/`, `tools/.venv/`, `*.docling.json`(추출 캐시)은 `.gitignore` — 로컬 전용.
+- 어댑터는 `tools/docling_extract.py` (PDF → 페이지별 블록 JSON, pt·좌상단 원점).
+- 첫 실행 시 레이아웃 모델을 자동 다운로드한다. 강제 지정: `--engine docling|poppler`.
+
 ## 로컬 미리보기
 ```bash
 python3 -m http.server 8000   # http://localhost:8000

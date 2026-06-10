@@ -1,0 +1,523 @@
+{
+  "version": 3,
+  "generatedBy": "exam-db-builder",
+  "engine": "docling",
+  "id": "금호고_공통영어1_기말_2025",
+  "title": "2025 금호고 공통영어1 기말고사",
+  "subject": "영어",
+  "source": {
+    "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+    "pages": 12
+  },
+  "groups": [
+    "선택형",
+    "서술형"
+  ],
+  "count": 28,
+  "questions": [
+    {
+      "id": "선택형-01",
+      "group": "선택형",
+      "number": 1,
+      "text": "※ 다음을 읽고 물음에 답하시오. 1. 다음 빈칸에 공통적으로 넣을 수 있는 것은? [3.4점 ] During the war, the enemy's of the capital caused widespread fear and confusion. He changed his from accountant to photographer to pursue a more creative path. ①1 intention ② occupation transition 5 distribution ③ ambition",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-01.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-01.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 1
+      },
+      "finalAnswer": "②",
+      "answerMatch": null,
+      "body": "**1.** 다음 빈칸에 공통적으로 넣을 수 있는 것은? **[3.4점]**\n\nDuring the war, the enemy's ____ of the capital caused widespread fear and confusion.\n\nHe changed his ____ from accountant to photographer to pursue a more creative path.\n\n① intention　② occupation　③ ambition　④ transition　⑤ distribution"
+    },
+    {
+      "id": "선택형-02",
+      "group": "선택형",
+      "number": 2,
+      "text": "2. 다음 중 어떤 의미의 사람을 지칭하는 표현으로 사용되는 단어(예: teacher / 교사)를 모두 고른 것 은? [3.7점] a recruit b critic © astronaut a precedent e acquaintance f career g addict h barrier i artisan j deceit k chief 1 a, b, © e ⑨, ①. K ② a, C d (f (h, ①, ① b, 9 i, ④ b, h, ①, (k ⑤ ©, Q. f, h, ①, ①",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-02.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-02.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 1
+      },
+      "finalAnswer": "①",
+      "answerMatch": null,
+      "body": "**2.** 다음 중 어떤 의미의 사람을 지칭하는 표현으로 사용되는 단어(예: teacher / 교사)를 <u>모두</u> 고른 것은? **[3.7점]**\n\n> ⓐ recruit　ⓑ critic　ⓒ astronaut　ⓓ precedent\n> ⓔ acquaintance　ⓕ career　ⓖ addict　ⓗ barrier\n> ⓘ artisan　ⓙ deceit　ⓚ chief\n\n① ⓐ, ⓑ, ⓒ, ⓔ, ⓖ, ⓘ, ⓚ\n② ⓐ, ⓒ, ⓓ, ⓕ, ⓗ, ⓘ, ⓙ\n③ ⓑ, ⓒ, ⓔ, ⓖ, ⓘ, ⓙ, ⓚ\n④ ⓑ, ⓓ, ⓕ, ⓖ, ⓗ, ⓙ, ⓚ\n⑤ ⓒ, ⓓ, ⓔ, ⓕ, ⓗ, ⓘ, ⓙ"
+    },
+    {
+      "id": "선택형-03",
+      "group": "선택형",
+      "number": 3,
+      "text": "3. 다음 글의 목적으로 가장 적절한 것은? [3.2점] Before my trip to the Netherlands, all I really knew about the country was that it's famous for windmills and tulips. But once | began cycling from town to town, I discovered so much more -unexpected beauty, quiet charm, and a feeling",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-03.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-03.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 1
+      },
+      "finalAnswer": "④",
+      "answerMatch": null,
+      "body": "**3.** 다음 글의 목적으로 가장 적절한 것은? **[3.2점]**\n\nBefore my trip to the Netherlands, all I really knew about the country was that it's famous for windmills and tulips. But once I began cycling from town to town, I discovered so much more—unexpected beauty, quiet charm, and a feeling of calm that stayed with me long after the journey was over.\n\nEven now, days after returning home, I often find myself thinking back to the peaceful canals, the colorful streets, and the beautiful view of windmills gently turning in the open fields of Zaanse Schans. I wanted to share some of those special moments with you. If you're ever thinking about visiting the Netherlands, I hope my post will give you a bit of inspiration—and maybe some helpful tips—for your own adventure.\n\n① Introducing Dutch cuisine and local recipes\n② Explaining the history of windmills in Europe\n③ Promoting eco-friendly cycling tours worldwide\n④ Sharing travel memories and tips about the Netherlands\n⑤ Describing famous art museums in the Netherlands"
+    },
+    {
+      "id": "선택형-04",
+      "group": "선택형",
+      "number": 4,
+      "text": "4. 다음 글의 밑줄 친 부분 중, 어법상 틀린 것은? [3.2점] I highly recommend ① to Visit the Zaanse Schans and Volendam if you want to get out of the busy city to experience traditional Dutch culture. A trip to the Netherlands wouldn't be complete without a visiting the windmills. Fortunately. you can get to the Zaanse Schans, ③ where you can see lots of windmills, in just 17 minutes by train from Amsterdam. The moment I saw the village, its beauty took my breath away. Several windmills were spinning by the river in the distance. Soon I felt like 1 ④ was taken to a point in the past. I looked into one of the working windmills, and it ⑤ was grinding nuts into oil with its large stone wheels.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-04.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-04.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 1
+      },
+      "finalAnswer": "①",
+      "answerMatch": null,
+      "body": "**4.** 다음 글의 밑줄 친 부분 중, 어법상 틀린 것은? **[3.2점]**\n\nI highly recommend ① <u>to visit</u> the Zaanse Schans and Volendam if you want to get out of the busy city to experience traditional Dutch culture. A trip to the Netherlands wouldn't be complete without ② <u>visiting</u> the windmills. Fortunately, you can get to the Zaanse Schans, ③ <u>where</u> you can see lots of windmills, in just 17 minutes by train from Amsterdam.\n\nThe moment I saw the village, its beauty took my breath away. Several windmills were spinning by the river in the distance. Soon I felt like I ④ <u>was taken</u> to a point in the past. I looked into one of the working windmills, ⑤ <u>was grinding</u> nuts into oil with its large stone wheels."
+    },
+    {
+      "id": "선택형-05",
+      "group": "선택형",
+      "number": 5,
+      "text": "[5~6] 다음을 읽고, 질문에 답하시오. (a) My first stop was the Anne Frank House, one of the old buildings lined up along the Prinsengracht, a canal in Amsterdam. Since (b) it was close to the hotel | was staying at, 1 decided to rent a bike to go (c) there. I enjoyed riding along the canal. The Anne Frank House is one of the most visited museums in the Netherlands. (d) It housed the secret hiding place of Anne Frank. There was an old bookcase on the second floor. It looked ordinary, but behind (e) it was a secret space where Anne and her family hid for over two years during World War II. The steep stairs and narrow passages gave me a better understanding of what ife must have been like for them back then. After visiting the Anne Frank House, 1 took a canal cruise on the Prinsengracht. The Canal houses l saw along the way had mostly been built during the Dutch Golden Age, which gives them great historical value. Taking the cruise was a great way to see the city from different angles. The gentle touch of the wind made the experience even more pleasant. 5. 윗글의 (a)-(e)중 가리키는 대상이 다른 것은? [3.2점] 1 (a) ② (b) ③ (C) 4 (d) ⑤ (e)",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-05.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-05.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 2
+      },
+      "finalAnswer": "⑤",
+      "answerMatch": null,
+      "body": "**[5~6]** 다음을 읽고, 질문에 답하시오.\n\n**(a)** My first stop was the Anne Frank House, one of the old buildings lined up along the Prinsengracht, a canal in Amsterdam. Since **(b)** it was close to the hotel I was staying at, I decided to rent a bike to go **(c)** there. I enjoyed riding along the canal. The Anne Frank House is one of the most visited museums in the Netherlands. **(d)** It housed the secret hiding place of Anne Frank.\n\nThere was an old bookcase on the second floor. It looked ordinary, but behind **(e)** it was a secret space where Anne and her family hid for over two years during World War Ⅱ. The steep stairs and narrow passages gave me a better understanding of what life must have been like for them back then.\n\nAfter visiting the Anne Frank House, I took a canal cruise on the Prinsengracht. The canal houses I saw along the way had mostly been built during the Dutch Golden Age, which gives them great historical value. Taking the cruise was a great way to see the city from different angles. The gentle touch of the wind made the experience even more pleasant.\n\n---\n\n**5.** 윗글의 (a)~(e) 중 가리키는 대상이 다른 것은? **[3.2점]**\n\n① (a)　② (b)　③ (c)　④ (d)　⑤ (e)"
+    },
+    {
+      "id": "선택형-06",
+      "group": "선택형",
+      "number": 6,
+      "text": "6. 윗글을 읽고 알 수 없는 것은? [3.3점] 1 What the Prinsengracht is ② How the writer got to his destination ③ What bicycle culture is like in the Netherlands ④ Where Anne Frank's secret hiding place is located ⑤ What Anne Franks quality of life was like in the hiding place",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-06.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-06.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 2
+      },
+      "finalAnswer": "③",
+      "answerMatch": null,
+      "body": "*([5~6] 공유지문 — 5번 지문 참조)*\n\n**6.** 윗글을 읽고 알 수 없는 것은? **[3.3점]**\n\n① What the Prinsengracht is\n② How the writer got to his destination\n③ What bicycle culture is like in the Netherlands\n④ Where Anne Frank's secret hiding place is located\n⑤ What Anne Frank's quality of life was like in the hiding place"
+    },
+    {
+      "id": "선택형-07",
+      "group": "선택형",
+      "number": 7,
+      "text": "7. 다음에서 언급된 사실이 아닌 것은? [3.4점] Amsterdam is home to a lot of museums, but the Van Gogh Museum was the one I was really excited to visit. The most interesting part of the museum was the way the exhibits were arranged to show how the artist's style had changed over time. The museum showed many of Vincent van Gogh's most well-known works, including my personal favorites: The Bedroom, Sunflowers, and Wheatfield with Crows. The yellow colors in The Bedroom seemed to convey a sense of relaxation. The different shades of yellow in Sunflowers were just amazing. In Wheatfield with Crows, the contrast between the bright yellow wheat field and the cool blue sky was striking. Overall, seeing the artworks in person was a very powerful experience. The museum also displayed the letters that Van Gogh wrote to his younger brother, Theo. Reading those letters, 1 found out how much the artist loved his brother. After I bought a few postcards with Van Gogh's art on them, I slowly cycled back to the hotel. On my way back, 1 couldn't help but admire the beautiful, calm, and scenic views of the city. especially people relaxing on the grass and enjoying the sun. ① Amsterdam has many museums besides the Van Gogh Museum. 2 All artworks mentioned above include yellow tones. ③ The exhibition was organized based on the evolution of Van Gogh's painting style. 4 Letters written to Van Gogh by his brother was displayed. ⑤ The writer purchased souvenirs at the art museum.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-07.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-07.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 2
+      },
+      "finalAnswer": "④",
+      "answerMatch": null,
+      "body": "**7.** 다음에서 언급된 사실이 아닌 것은? **[3.4점]**\n\nAmsterdam is home to a lot of museums, but the Van Gogh Museum was the one I was really excited to visit. The most interesting part of the museum was the way the exhibits were arranged to show how the artist's style had changed over time. The museum showed many of Vincent van Gogh's most well-known works, including my personal favorites: The Bedroom, Sunflowers, and Wheatfield with Crows. The yellow colors in The Bedroom seemed to convey a sense of relaxation. The different shades of yellow in Sunflowers were just amazing. In Wheatfield with Crows, the contrast between the bright yellow wheat field and the cool blue sky was striking. Overall, seeing the artworks in person was a wonderful experience.\n\nThe museum also displayed the letters that Van Gogh wrote to his younger brother, Theo. Reading those letters, I found out how much the artist loved his brother. After I bought a few postcards with Van Gogh's art on them, I slowly cycled back to the hotel. On my way back, I couldn't help but admire the beautiful, calm, and scenic views of the city, especially people relaxing on the grass and enjoying the sun.\n\n① Amsterdam has many museums besides the Van Gogh Museum.\n② All artworks mentioned above include yellow tones.\n③ The exhibition was organized based on the evolution of Van Gogh's painting style.\n④ Letters written to Van Gogh by his brother were displayed at the museum.\n⑤ The writer purchased souvenirs at the museum."
+    },
+    {
+      "id": "선택형-08",
+      "group": "선택형",
+      "number": 8,
+      "text": "8. 다음 글에 드러난 1'의 심경 변화로 가장 적 절한 것은? [3.3점] Near the windmills, I found a cheese farm and a clog factory. At first, I was reluctant to try the Dutch cheeses because they were mostly new to me. l was also unsure whether the clogs would be comfortable to wear. However, I decided to give them a try. l was surprised by the variety of cheeses, and when I tasted some, they turned few pairs of clogs and found them quite out to be incredibly delicious. I also tried on a comfortable, which I hadn't expected. 1) indifferent ② hesitant ③ hopeful 4 Curious (⑤ frustrated impressed > satisfied -> aisappointed > grateful > relieved",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-08.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-08.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 3
+      },
+      "finalAnswer": "②",
+      "answerMatch": null,
+      "body": "**8.** 다음 글에 드러난 'I'의 심경 변화로 가장 적절한 것은? **[3.3점]**\n\nNear the windmills, I found a cheese farm and a clog factory. At first, I was reluctant to try the Dutch cheeses because they were mostly new to me. I was also unsure whether the clogs would be comfortable to wear. However, I decided to give them a try. I was surprised by the variety of cheeses, and when I tasted some, they turned out to be incredibly delicious. I also tried on a few pairs of clogs and found them quite comfortable, which I hadn't expected.\n\n① indifferent → impressed　② hesitant → satisfied　③ hopeful → disappointed　④ curious → grateful　⑤ frustrated → relieved"
+    },
+    {
+      "id": "선택형-09",
+      "group": "선택형",
+      "number": 9,
+      "text": "9. 다음 글의 밑줄 친 부분을 잘못 이해한 것은? [3.3점 ] After being completely destroyed during World War II, Rotterdam was restored into a beautiful port city. Experimental and artistic constructions were used to improve the appearance of the city. The Cube Houses in Rotterdam are among the most innovative buildings in the Country. The bright yellow houses were something | had been looking forward to seeing, and they were as fantastic as I had expected. One of the key features of the Cube Houses is that the cubes are tilted by 45 degrees. 1 visited the Show Cube Museum to get a feel of what life in such a house was like. From the outside, it looked entirely twisted, but once 1 went inside, it was surprisingly quite comfortable.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-09.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-09.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 3
+      },
+      "finalAnswer": "⑤",
+      "answerMatch": null,
+      "body": "**9.** 다음 글의 밑줄 친 부분을 잘못 이해한 것은? **[3.3점]**\n\nAfter being completely destroyed during World War II, Rotterdam was restored into a beautiful city. Experimental and artistic constructions were used to improve the appearance of the city. <u>The Cube Houses</u> in Rotterdam are among the most innovative buildings in the country. The bright yellow houses were something I had been looking forward to seeing, and they were as fantastic as I had expected.\n\nOne of the key features of the Cube Houses is that the cubes are tilted by 45 degrees. I visited the Show Cube Museum to get a feel of what life in such a house was like. From the outside, it looked entirely twisted, but once I went inside, it was surprisingly quite comfortable."
+    },
+    {
+      "id": "선택형-10",
+      "group": "선택형",
+      "number": 10,
+      "text": "10. 다음 글의 요지로 가장 적절한 것은? [3.4점] While art can stir up a sense of beauty in us, it can also draw a spirited reaction from the public. An excellent artistic piece can communicate a message to us and even change our ways of looking at our surroundings. That is why art has played an essential role in addressing social and global issues throughout history. Among these issues, environmental problems have become a major focus for many current artists. Art can strike up conversations about the environment, but more importantly, it can also make a great difference by inspiring us to take action. The following words from Andy Warhol, an American pop artist, ring especially true in this context: \"They always say time changes things, but you actually have to change them yourself.\" ① It is difficult for art to make people take action. 2 Art should pursue beauty, not deliver social messages. ③ Art is a tool to raise awareness of environmental Issues. ④ Every pop artist focuses on environmental themes to create change. ⑤ Art can deliver social messages, including environmental issues, and inspire action.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-10.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-10.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 3
+      },
+      "finalAnswer": "⑤",
+      "answerMatch": null,
+      "body": "**10.** 다음 글의 요지로 가장 적절한 것은? **[3.4점]**\n\nWhile art can stir up a sense of beauty in us, it can also draw a spirited reaction from the public. An excellent artistic piece can communicate a message to us and even change our ways of looking at our surroundings. That is why art has played an essential role in addressing social and global issues throughout history.\n\nAmong these issues, environmental problems have become a major focus for many current artists. Art can strike up conversations about the environment, but more importantly, it can also make a great difference by inspiring us to take action. The following words from Andy Warhol, an American pop artist, ring especially true in this context: \"They always say time changes things, but you actually have to change them yourself.\"\n\n① It is difficult for art to make people take action.\n② Art should pursue beauty, not deliver social messages.\n③ Art is a tool to raise awareness of environmental issues.\n④ Every pop artist focuses on environmental themes to create change.\n⑤ Art can deliver social messages, including environmental issues, and inspire action."
+    },
+    {
+      "id": "선택형-11",
+      "group": "선택형",
+      "number": 11,
+      "text": "[11~12] 다음을 읽고, 질문에 답하시오. The first art piece is a photograph by Benjamin Von Wong. His artworks rally people around environmental actions. In the photo on the left, titled Turn Off the Plastic Tap, he tries to highlight the fact that a huge amount of plastic (a) enters the ocean every minute. He says, \"You can't order a product online without having it (b) deliver in plastic packaging. Also, the clothes you are wearing must be, at least in part, made of plastic. Dependence on plastic (c) is built into the supply chain, so the individual consumer finds it harder and harder to opt out. Of course, you can choose (d) not to purchase products containing plastic, but that only goes so far. I think it is important for you to inform your friends and family (e) of the issue because at the end of the day. you know, companies and governments can't ignore the interest of the consumers. At the same time, we also need to pressure governments and corporations to do the right thing.\" 11. 윗글의 (a)~(e) 중 어법상 틀린 것은? [3.5점] 1 (a) 2 (b) ③ (C) ④ (d) ⑤ (e)",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-11.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-11.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 4
+      },
+      "finalAnswer": "②",
+      "answerMatch": null,
+      "body": "**[11~12]** 다음을 읽고, 질문에 답하시오.\n\nThe first art piece is a photograph by Benjamin Von Wong. His artworks rally people around environmental actions. In the photo on the left, titled Turn Off the Plastic Tap, he tries to highlight the fact that a huge amount of plastic **(a)** <u>enters</u> the ocean every minute.\n\nHe says, \"You can't order a product online without having it **(b)** <u>deliver</u> in plastic packaging. Also, the clothes you are wearing must be, at least in part, made of plastic. Dependence on plastic **(c)** <u>is built</u> into the supply chain, so the individual consumer finds it harder and harder to opt out. Of course, you can choose **(d)** <u>not to purchase</u> products containing plastic, but that only goes so far. I think it is important for you to inform your friends and family **(e)** <u>of the issue</u> because at the end of the day, you know, companies and governments can't ignore the interest of the consumers. At the same time, we also need to pressure governments and corporations to do the right thing.\"\n\n---\n\n**11.** 윗글의 (a)~(e) 중 어법상 틀린 것은? **[3.5점]**\n\n① (a)　② (b)　③ (c)　④ (d)　⑤ (e)"
+    },
+    {
+      "id": "선택형-12",
+      "group": "선택형",
+      "number": 12,
+      "text": "1 (a) 2 (b) ③ (C) ④ (d) ⑤ (e) According to Wong, what is considered essential for effectively addressing the plastic cr isis? [3.5점] 1 raising awareness through creative photos ② recycling more often at the individual level ③ reducing plastic use by limiting consumer demand ④ Calling for stricter government policies and corporate responsibility ⑤ finding alternatives to plastic in daily routines for sustainable living",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-12.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-12.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 4
+      },
+      "finalAnswer": "④",
+      "answerMatch": null,
+      "body": "*([11~12] 공유지문 — 11번 지문 참조)*\n\n**12.** According to Wong, what is considered essential for effectively addressing the plastic crisis? **[3.5점]**\n\n① raising awareness through creative photos\n② recycling more often at the individual level\n③ reducing plastic use by limiting consumer demand\n④ calling for stricter government policies and corporate responsibility\n⑤ finding alternatives to plastic in daily routines for sustainable living"
+    },
+    {
+      "id": "선택형-13",
+      "group": "선택형",
+      "number": 13,
+      "text": "13. Jon Chingol 밑줄 친 부분과 같이 작품을 표현하 는 이유로 가장 적절한 것은? [3.5점] The piece below. titled Homestead, is a painting by Jon Ching. Most of his work, including this painting, is a celebration of nature and a quiet appeal to humans to appreciate the world around them. \"I believe we've separated ourselves from nature and no longer see how we fit in. Instead of helping nature thrive, we are simply consuming it,\" says Ching. One cannot help but smile at his paintings, which are rich in color and tenderness. One of the fun aspects of his work is how he blends the features of one life form with those of another. \"Ive been using my Work as a means of commenting on issues and problems I'm heavily interested in. l find it necessary to express a silver lining rather than just reflect on what's wrong. I want to show that everything is connected and that protecting nature is actually protecting us. My call to action is to remember the magic and wonder of this planet.\" 1 to make his paintings look more realistic ② to show the diversity of creatures on Earth ③ to confuse viewers about the identity of creatures 4 to highlight the interdependence among living beings 5 to remember species that humans have driven to extinction",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-13.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-13.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 4
+      },
+      "finalAnswer": "④",
+      "answerMatch": null,
+      "body": "**13.** Jon Ching이 밑줄 친 부분과 같이 작품을 표현하는 이유로 가장 적절한 것은? **[3.5점]**\n\nThe piece below, titled *Homestead*, is a painting by Jon Ching. Most of his work, including this painting, is a celebration of nature and a quiet appeal to humans to appreciate the world around them. \"I believe we've separated ourselves from nature and no longer see how we fit in. Instead of helping nature thrive, we are simply consuming it,\" says Ching.\n\nOne cannot help but smile at his paintings, which are rich in color and tenderness. One of the fun aspects of his work is <u>how he blends the features of one life form with those of another.</u> \"I've been using my work as a means of commenting on issues and problems I'm heavily interested in. I find it necessary to express a silver lining rather than just reflect on what's wrong. I want to show that everything is connected and that protecting nature is actually protecting us. My call to action is to remember the magic and wonder of this planet.\"\n\n① to make his paintings look more realistic\n② to show the diversity of creatures on Earth\n③ to confuse viewers about the identity of creatures\n④ to highlight the interdependence among living beings\n⑤ to remember species that humans have driven to extinction"
+    },
+    {
+      "id": "선택형-14",
+      "group": "선택형",
+      "number": 14,
+      "text": "14. 다음 글에서 전체 흐름과 관계 없는 문장은? [3.4점] A 2019 University of Minnesota study revealed that while white individuals were exposed to less pollution than they caused, ① Hispanic and Black individuals faced significantly more pollution than they generated. ② These disparities are often tied to location, with marginalized groups more likely to live near polluting industries. ③ The energy, transportation, and manufacturing industries are among the largest contributors to carbon dioxide emissions worldwide. ④ The U.S. Environmental Protection Agency (EPA) found that Black and African American populations are the most affected by climate change, facing higher risks of premature death and childhood asthma due to extreme temperatures. ⑤ Similarly. Hispanic and Latino workers, heavily represented in outdoor industries like construction and agriculture, are especially vulnerable to heat-related labor impacts.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-14.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-14.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 5
+      },
+      "finalAnswer": "③",
+      "answerMatch": null,
+      "body": "**14.** 다음 글에서 전체 흐름과 관계 없는 문장은? **[3.4점]**\n\nA 2019 University of Minnesota study revealed that while white individuals were exposed to less pollution than they caused, ① Hispanic and Black individuals faced significantly more pollution than they generated. ② These disparities are often tied to location, with marginalized groups more likely to live near polluting industries. ③ The energy, transportation, and manufacturing industries are among the largest contributors to carbon dioxide emissions worldwide. ④ The U.S. Environmental Protection Agency (EPA) found that Black and African American populations are the most affected by climate change, facing higher risks of premature death and childhood asthma due to extreme temperatures. ⑤ Similarly, Hispanic and Latino workers, heavily represented in outdoor industries like construction and agriculture, are especially vulnerable to heat-related labor impacts."
+    },
+    {
+      "id": "선택형-15",
+      "group": "선택형",
+      "number": 15,
+      "text": "15. 다음 글의 밑줄 친 부분 중, 문맥상 낱말의 쓰 임이 적절하지 않은 것은? [3.5점] Climate change impacts are ① evenly distributed; they intersect with ② existing inequalities related to socioeconomic status, race, gender, and location. Marginalized groups-such as ethnic minorities, low-income individuals, and women-are more vulnerable due to structural inequalities and ③ limited resources to adapt. To address the climate crisis effectively. it is essential to view it through a social justice lens. Recognizing and correcting these ④ disparities is key to achieving climate justice and creating a more ⑤ equitable and resilient society.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-15.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-15.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 5
+      },
+      "finalAnswer": "①",
+      "answerMatch": null,
+      "body": "**15.** 다음 글의 밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지 않은 것은? **[3.5점]**\n\nClimate change impacts are ① <u>evenly</u> distributed; they intersect with ② <u>existing</u> inequalities related to socioeconomic status, race, gender, and location. Marginalized groups—such as ethnic minorities, low-income individuals, and women—are more vulnerable due to structural inequalities and ③ <u>limited</u> resources to adapt. To address the climate crisis effectively, it is essential to view it through a social justice lens. Recognizing and correcting these ④ <u>disparities</u> is key to achieving climate justice and creating a more ⑤ <u>equitable</u> and resilient society."
+    },
+    {
+      "id": "선택형-16",
+      "group": "선택형",
+      "number": 16,
+      "text": "16. 다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A)와 (B)에 들어갈 말로 가장 적절한 것은? [3.6점] It is natural for people to observe happenings and then seek explanations for why those happenings occurred. But sometimes the reasoning is wrong because of one or more misconceptions. One of these is the ecological fallacy, where an argument claims that there is a causal relationship between two things merely because they occur together. For example, in the 1950s it was found that crime rates were the highest in neighborhoods where immigrants were most numerous. Some people used this \"co-occurrence\" to argue that immigrants were a cause of crime. But a careful analysis of this situation revealed that immigrants were forced to live in neighborhoods where crime rates were already high; they could not afford more expensive housing in safer neighborhoods. Immigrants themselves committed very few of the crimes. Unless you analyze the claim carefully, you would misinterpret the relationship and thereby construct a faulty belief. People may draw faulty conclusions by mistaking co-occurrence for (A) especially when influenced by biases or (B) like the ecological fallacy. ① coincidence _ generalization ② connection -> myths ③ association -> ④ causation ⑤ correlation (A) (B) prediction -> stereotypes -> assumption",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-16.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-16.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 5
+      },
+      "finalAnswer": "④",
+      "answerMatch": null,
+      "body": "**16.** 다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A)와 (B)에 들어갈 말로 가장 적절한 것은? **[3.6점]**\n\nIt is natural for people to observe happenings and then seek explanations for why those happenings occurred. But sometimes the reasoning is wrong because of one or more misconceptions. One of these is the ecological fallacy, where an argument claims that there is a causal relationship between two things merely because they occur together. For example, in the 1950s it was found that crime rates were the highest in neighborhoods where immigrants were most numerous. Some people used this \"co-occurrence\" to argue that immigrants were a cause of crime. But a careful analysis of this situation revealed that immigrants were forced to live in neighborhoods where crime rates were already high; they could not afford more expensive housing in safer neighborhoods. Immigrants themselves committed very few of the crimes. Unless you analyze the claim carefully, you would misinterpret the relationship and thereby construct a faulty belief.\n\n> People may draw faulty conclusions by mistaking co-occurrence for \\_\\_\\_\\_\\_(A)\\_\\_\\_\\_\\_, especially when influenced by biases or \\_\\_\\_\\_\\_(B)\\_\\_\\_\\_\\_ like the ecological fallacy.\n\n| | (A) | | (B) |\n|---|---|---|---|\n| ① | coincidence | → | generalization |\n| ② | connection | → | myths |\n| ③ | association | → | prediction |\n| ④ | causation | → | stereotypes |\n| ⑤ | correlation | → | assumption |"
+    },
+    {
+      "id": "선택형-17",
+      "group": "선택형",
+      "number": 17,
+      "text": "17. 다음에서 밑줄 친 부분이 가리키는 일로 언급된 것에 해당하는 것을 모두 고르면? [3.7점] In everyday life, we previous experiences to predict where we should pay attention. Different environments create different expectations. This was profoundly illustrated by the scientist Jared Diamond in his book Guns, Germs, and Steel He describes an adventure wandering through the New Guinea jungle with native New Guineans. He relates that these natives tend to perform poorly at tasks Westerners have been trained to do since childhood. But they are hardly stupid. They can detect the most subtle changes in the jungle, good for following the tracks of a predator or for finding the way back home. They know which insects to leave alone, know where food exists, can build and tear down shelters with ease. Diamond, who had never spent time in such places, has no ability to pay attention to these things. Were he to be tested on such tasks, he also would perform poorly. fire-making 2 jungle navigation ③ tracking animal footprints 4 making tools and weapons ⑤ Distinguishing safe and unsafe plants",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-17.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-17.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 6
+      },
+      "finalAnswer": "②③",
+      "answerMatch": null,
+      "body": "**17.** 다음에서 밑줄 친 부분이 가리키는 일로 언급된 것에 해당하는 것을 모두 고르면? **[3.7점]**\n\nIn everyday life, we use previous experiences to predict where we should pay attention. Different environments create different expectations. This was profoundly illustrated by the scientist Jared Diamond in his book *Guns, Germs, and Steel*. He describes an adventure wandering through the New Guinea jungle with native New Guineans. He relates that these natives tend to perform poorly at tasks Westerners have been trained to do since childhood. But they are hardly stupid. They can detect the most subtle changes in the jungle, good for following the tracks of a predator or for finding the way back home. They know which insects to leave alone, know where food exists, can build and tear down shelters with ease. Diamond, who had never spent time in such places, has no ability to pay attention to <u>these things</u>. Were he to be tested on such tasks, he also would perform poorly.\n\n① fire-making\n② jungle navigation\n③ tracking animal footprints\n④ making tools and weapons\n⑤ Distinguishing safe and unsafe plants"
+    },
+    {
+      "id": "선택형-18",
+      "group": "선택형",
+      "number": 18,
+      "text": "18. 글의 흐름으로 보아, 주어진 문장이 들어가기에 가장 적절한 곳은? [3.6점] This makes it possible for other scientists to reconsider their data and possibly refute their conclusions. When scientists make an important new discovery or experimentally prove some hypothesis, they do not, in general, keep that",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-18.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-18.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 6
+      },
+      "finalAnswer": "③",
+      "answerMatch": null,
+      "body": "**18.** 글의 흐름으로 보아, 주어진 문장이 들어가기에 가장 적절한 곳은? **[3.6점]**\n\n> This makes it possible for other scientists to reconsider their data and possibly refute their conclusions.\n\nWhen scientists make an important new discovery or experimentally prove some hypothesis, they do not, in general, keep that information to themselves. ( ① ) Instead, they share it so that others can consider its meaning and derive additional theories from it. ( ② ) In other words, they publish their results and make their data available for inspection. ( ③ ) More important, though, it makes it possible for other scientists to use that data to construct new hypotheses and perform new experiments. ( ④ ) The assumption is that society as a whole will end up knowing more if information is spread as widely as possible, rather than being limited to a few people. ( ⑤ ) In a strict sense, every scientist depends on the work of other scientists."
+    },
+    {
+      "id": "선택형-19",
+      "group": "선택형",
+      "number": 19,
+      "text": "19. 글의 흐름으로 보아, 주어진 문장이 들어가기에 · 가장 적절한 곳은? [3.6점] And this can be a very costly mistake that may lead to the failure of their new business. Most entrepreneurs put in tremendous amounts of time and effort in creating and launching new products and services and then make the mistake of overpricing them. (① ) They have created something they care deeply about, it's theirs, and this powerful sense of ownership distorts their perception of value that their initial prices are too high, not all service, your priority should be to get sufficient market adoption as soon as possible. (④ ) which causes them to overprice their products. (② ) While many of them are quick to realize these people are happy or willing to drop their prices to make their products more attractive. (③ ) When you launch a new product or You should be ready to sacrifice your initial prices and profits to achieve this aim. (⑤ ) Once you have strong sales volumes, you can increase your prices to maximize your profits.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-19.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-19.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 6
+      },
+      "finalAnswer": "②",
+      "answerMatch": null,
+      "body": "**19.** 글의 흐름으로 보아, 주어진 문장이 들어가기에 가장 적절한 곳은? **[3.6점]**\n\n> And this can be a very costly mistake that may lead to the failure of their new business.\n\nMost entrepreneurs put in tremendous amounts of time and effort in creating and launching new products and services and then make the mistake of overpricing them. ( ① ) They have created something they care deeply about, it's theirs, and this powerful sense of ownership distorts their perception of value which causes them to overprice their products. ( ② ) While many of them are quick to realize that their initial prices are too high, not all these people are happy or willing to drop their prices to make their products more attractive. ( ③ ) When you launch a new product or service, your priority should be to get sufficient market adoption as soon as possible. ( ④ ) You should be ready to sacrifice your initial prices and profits to achieve this aim. ( ⑤ ) Once you have strong sales volumes, you can increase your prices to maximize your profits."
+    },
+    {
+      "id": "선택형-20",
+      "group": "선택형",
+      "number": 20,
+      "text": "20. 다음 빈칸에 들어갈 말로 적절하지 않은 것은? [3.6점] History, people often say, repeats itself. And looking at the historical records of the ancient civilizations, some things do seem to happen again and again. Civilizations expand, get overextended, and then collapse as in the Cases of Rome, which went under in 476 AD, and the British Empire, which fell apart more than a thousand years later in the post-World War II era. But is this always the case? If so, archaeology would be pretty boring; one thing would happen again and again. But that's not what archaeologists see. Some civilizations end suddenly, like the Aztec and Inca, conquered by invaders in the 1520s AD. Those empires never had the chance to collapse as a result of overexpansion. In fact, in the case of Civilizations, \"history repeats itself occasionally seems to be a (1 fallacy 3 generalization 5 misconception ② prediction 4 Simplification",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-20.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-20.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 7
+      },
+      "finalAnswer": "②",
+      "answerMatch": null,
+      "body": "**20.** 다음 빈칸에 들어갈 말로 적절하지 않은 것은? **[3.6점]**\n\nHistory, people often say, repeats itself. And looking at the historical records of the ancient civilizations, some things do seem to happen again and again. Civilizations expand, get overextended, and then collapse as in the cases of Rome, which went under in 476 AD, and the British Empire, which fell apart more than a thousand years later in the post-World War II era. But is this always the case? If so, archaeology would be pretty boring; one thing would happen again and again. But that's not what archaeologists see. Some civilizations end suddenly, like the Aztec and Inca, conquered by invaders in the 1520s AD. Those empires never had the chance to collapse as a result of overexpansion. In fact, in the case of civilizations, \"history repeats itself\" occasionally seems to be a ______________.\n\n① fallacy\n② prediction\n③ generalization\n④ simplification\n⑤ misconception"
+    },
+    {
+      "id": "선택형-21",
+      "group": "선택형",
+      "number": 21,
+      "text": "21. 다음 빈칸에 들어갈 말로 가장 적절한 것은? [3.7점] There is a natural assumption of truth, or a truth bias when humans communicate with one another. In other words, when we're listening to others or reading their words, our automatic assumption is that the other person is telling the truth. This usually works out fine. If you ask someone where the restroom is located or if it's raining outside, you can safely assume that most people will not lie in their responses. Imagine how difficult it would be to converse with someone if you assumed that everything they were telling you was false! Indeed, questioning the truth of a statement and then choosing not to believe it requires additional mental steps.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-21.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-21.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 7
+      },
+      "finalAnswer": "⑤",
+      "answerMatch": null,
+      "body": "**21.** 다음 빈칸에 들어갈 말로 가장 적절한 것은? **[3.7점]**\n\nThere is a natural assumption of truth, or a truth bias when humans communicate with one another. In other words, when we're listening to others or reading their words, our automatic assumption is that the other person is telling the truth. This usually works out fine. If you ask someone where the restroom is located or if it's raining outside, you can safely assume that most people will not lie in their responses. Imagine how difficult it would be to converse with someone if you assumed that everything they were telling you was false! Indeed, questioning the truth of a statement and then choosing not to believe it requires additional mental steps. For the most part, humans are \"cognitive misers,\" which means we ____ in a given situation. It makes sense then, that when we see something online, even if it is fake, our default is to believe it, at least at first.\n\n① naturally don't trust others' words\n② prefer to prove all information before accepting it\n③ save energy by telling the truth when communicating\n④ achieve more accurate communication by questioning the truth\n⑤ tend to invest only the mental effort that seems to be needed"
+    },
+    {
+      "id": "선택형-22",
+      "group": "선택형",
+      "number": 22,
+      "text": "22. 주어진 글 다음에 이어질 글의 순서로 가장 적절 한 것은? [3.7점] We have a diving reflex', like other marine mammals. (A) But if we sink just our face in a bowl of water, while the whole of the rest of our body is in the dry air, the diving reflex is triggered. (B) This means that special nerve endings on our faces, around the mouth and nose, trigger this reflex only when the facial region goes under water. If we are in the water, with our head out in the air, there is no diving reflex. (C) By contrast, if a chimpanzee or a gorilla found itself in water with its face below the surface, it would panic, its heart would race and it would quickly drown. (D) It automatically closes down the airway. reducing the risk of swallowing water, and it narrows the small air-passages in the lungs. At the same time the heart rate is slowed down to half speed and blood is shunted to the Vital organs, protecting them from the effects of the brief stop in breathing.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-22.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-22.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 7
+      },
+      "finalAnswer": "⑤",
+      "answerMatch": null,
+      "body": "**22.** 주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은? **[3.7점]**\n\n> We have a \"diving reflex,\" like other marine mammals.\n\n**(A)** But if we sink just our face in a bowl of water, while the whole of the rest of our body is in the dry air, the diving reflex is triggered.\n\n**(B)** This means that special nerve endings on our faces, around the mouth and nose, trigger this reflex only when the facial region goes under water. If we are in the water, with our head out in the air, there is no diving reflex.\n\n**(C)** By contrast, if a chimpanzee or a gorilla found itself in water with its face below the surface, it would panic, its heart would race and it would quickly drown.\n\n**(D)** It automatically closes down the airway, reducing the risk of swallowing water, and it narrows the small air-passages in the lungs. At the same time the heart rate is slowed down to half speed and blood is shunted to the vital organs, protecting them from the effects of the brief stop in breathing.\n\n① (B)-(A)-(D)-(C)\n② (B)-(D)-(A)-(C)\n③ (C)-(A)-(D)-(B)\n④ (C)-(B)-(D)-(A)\n⑤ (D)-(A)-(C)-(B)"
+    },
+    {
+      "id": "선택형-23",
+      "group": "선택형",
+      "number": 23,
+      "text": "23. 다음 글의 주제로 가장 적절한 것은? [3.7점] Stanford psychology professor Dr. Carol Dweck is the internationally recognized pioneer of the concept of \"growth mindset\" as a way to continually grow, learn, and persevere in our efforts. Dweck found that kids who are told they're \"smart\" actually underperform in future tasks, by choosing easier tasks to avoid evidence that they are not smart, which Dweck calls having a \"fixed mindset.\" In contrast, Dweck found, kids who are praised not for their smarts but for their effort develop what Dweck calls a \"growth mindset.\" They learn that their effort is what led to their success, and if they continue to try, over time they'll improve and achieve more things. These kids end up taking on tougher things, and feel better about themselves. \"Emphasizing effort gives a child a variable that they can control,\" Dweck has explained. 1 the importance of emphasizing success to children 2 the long-term benefits of being praised since Childhood 3 the reasons children prefer simple tasks over difficult challenges ④ methods teachers use to assess students' intelligence and ability ⑤ The influence of how praise is given on motivation and growth [서술형1~5] 다음부터는 서술형 문항입니다. (별도의 서술형 답안지 사용)",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/선택형-23.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/선택형-23.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 8
+      },
+      "finalAnswer": "⑤",
+      "answerMatch": null,
+      "body": "**23.** 다음 글의 주제로 가장 적절한 것은? **[3.7점]**\n\nStanford psychology professor Dr. Carol Dweck is the internationally recognized pioneer of the concept of \"growth mindset\" as a way to continually grow, learn, and persevere in our efforts. Dweck found that kids who are told they're \"smart\" actually underperform in future tasks, by choosing easier tasks to avoid evidence that they are not smart, which Dweck calls having a \"fixed mindset.\" In contrast, Dweck found, kids who are praised not for their smarts but for their effort develop what Dweck calls a \"growth mindset.\" They learn that their effort is what led to their success, and if they continue to try, over time they'll improve and achieve more things. These kids end up taking on tougher things, and feel better about themselves. \"Emphasizing effort gives a child a variable that they can control,\" Dweck has explained.\n\n① the importance of emphasizing success to children\n② the long-term benefits of being praised since childhood\n③ the reasons children prefer simple tasks over difficult challenges\n④ methods teachers use to assess students' intelligence and ability\n⑤ The influence of how praise is given on motivation and growth"
+    },
+    {
+      "id": "서술형-01",
+      "group": "서술형",
+      "number": 1,
+      "text": "[서1~서리 다음을 읽고, 질문에 답하시오. Forget Me Not is Jenny Kendlers personal love letter to the sea. She covered an old boom box with various shells, which took her a year to collect. The boom box plays something you may regard as calming ocean sounds. They are actually what she recorded as she had one of her baby teeth dissolve in acid. She wanted us to think of what sea creatures might go through one day if we continue burning fossil fuels carelessly. As the ocean absorbs more and more carbon dioxide, it becomes more and more acidic. Under this condition, the hard shells of many marine species will dissolve. Kendler says, \"| wanted to inspire people to raise their own awareness about what they can actually do as individuals, but at the same time, I hoped to encourage collective action and collective responsibility. One thing that art can do really well is to help us imagine how the world might be otherwise. Certainly, we can't get to a different place if we can't imagine it.\" [서술형 1] 다음 질문에 8단어 이상의 완전한 문장으 로 답하시오. [4점] What does the artist's baby tooth represent in Forget Me Not?",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/서술형-01.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/서술형-01.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 8
+      },
+      "finalAnswer": "the dissolving shells of marine species",
+      "answerMatch": null,
+      "body": "**[서술형 1~2]** 다음 글을 읽고, 질문에 답하시오.\n\n*Forget Me Not* is Jenny Kendler's personal love letter to the sea. She covered an old boom box with various shells, which took her a year to collect. The boom box plays something you may regard as calming ocean sounds. They are actually what she recorded as she had one of her baby teeth dissolve in acid. She wanted us to think of what sea creatures might go through one day if we continue burning fossil fuels carelessly. As the ocean absorbs more and more carbon dioxide, it becomes more and more acidic. Under this condition, the hard shells of many marine species will dissolve.\n\nKendler says, \"I wanted to inspire people to raise their own awareness about what they can actually do as individuals, but at the same time, I hoped to encourage collective action and collective responsibility. One thing that art can do really well is to help us imagine how the world might be otherwise. Certainly, we can't get to a different place if we can't imagine <u>it</u>.\"\n\n---\n\n**[서술형 1]** 다음 질문에 8단어 이상의 완전한 문장으로 답하시오. **[4점]**\n\nWhat does the artist's baby tooth represent in *Forget Me Not*?\n\n> (답: ________________________)"
+    },
+    {
+      "id": "서술형-02",
+      "group": "서술형",
+      "number": 2,
+      "text": "[서술형 2] 윗글의 밑줄친 'it'이 가리키는 대상을 찾 아 쓰고, 한글로 그 의미를 8글자 이상으로 설명 하시오. [4점 / 각 2점] 대상 : 의미 :",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/서술형-02.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/서술형-02.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 8
+      },
+      "finalAnswer": "a different place (도달하려는 더 나은 세상)",
+      "answerMatch": null,
+      "body": "*([서술형 1~2] 공유지문 — 서술형 1 지문 참조)*\n\n**[서술형 2]** 윗글의 밑줄친 'it'이 가리키는 대상을 찾아 쓰고, 한글로 그 의미를 8글자 이상으로 설명하시오. **[4점 / 각 2점]**\n\n- (1) 대상: ________________\n- (2) 의미: ________________"
+    },
+    {
+      "id": "서술형-03",
+      "group": "서술형",
+      "number": 3,
+      "text": "[서술형 3](A)와 (B)에 알맞은 단어를 넣으시오. [4점 / 각 2점] Paying with plastic fundamentally changes the way we spend money. altering the Calculus of our financial decisions. When you buy something with cash, the purchase involves an actual loss -your wallet is literally lighter. Credit cards, however, make the purchase abstract, so that you don't really feel the downside of spending money. Brain-imaging experiments suggest that paying with credit cards actually reduces activity in the insula, a brain region associated with negative feelings. As George Loewenstein, a neuroeconomist at Carnegie Mellon, says, \"The nature of credit cards anesthetizes your brain against the pain of payment.\" Spending money doesn't feel bad, so you spend more money. Duncan Simester, two business professors at participants in the auction were informed that Consider this experiment: Drazen Prelec and MIT, organized a real-life, sealed-bid auction for tickets to a Boston Celtics game. Half the they had to pay with cash; the other half were told they had to pay with credit cards. Prelec and Simester then averaged the bids for the two different groups. It turns out that The average cash bid was even 1 (A) than the average credit card bid. When people used cash, they bid more _ (B) _. They felt the need to limit their expenses. (A) (B)",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/서술형-03.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/서술형-03.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 9
+      },
+      "finalAnswer": "(A) lower / (B) carefully",
+      "answerMatch": null,
+      "body": "**[서술형 3]** (A)와 (B)에 알맞은 단어를 넣으시오. **[4점 / 각 2점]**\n\nPaying with plastic fundamentally changes the way we spend money, altering the calculus of our financial decisions. When you buy something with cash, the purchase involves an actual loss — your wallet is literally lighter. Credit cards, however, make the purchase abstract, so that you don't really feel the downside of spending money. Brain-imaging experiments suggest that paying with credit cards actually reduces activity in the insula, a brain region associated with negative feelings. As George Loewenstein, a neuroeconomist at Carnegie Mellon, says, \"The nature of credit cards anesthetizes your brain against the pain of payment.\" Spending money doesn't feel bad, so you spend more money.\n\nConsider this experiment: Drazen Prelec and Duncan Simester, two business professors at MIT, organized a real-life, sealed-bid auction for tickets to a Boston Celtics game. Half the participants in the auction were informed that they had to pay with cash; the other half were told they had to pay with credit cards. Prelec and Simester then averaged the bids for the two different groups. It turns out that the average cash bid was even (A) ____ than the average credit card bid. When people used cash, they bid more (B) ____. They felt the need to limit their expenses.\n\n- (A): ________\n- (B): ________"
+    },
+    {
+      "id": "서술형-04",
+      "group": "서술형",
+      "number": 4,
+      "text": "[서술형 4) 빈칸에 들어갈 내용으로 밑줄 친 residents가 겪는 어려움의 이유를 설명하는 문장 을 완성하시오. 주어진 단어를 모두 활용하여 적 절히 배치하되, 필요한 경우 단어를 변형하거나 추가하여 쓰시오. [5점] Oxfam Hong Kong's 2021 study found that nearly half of subdivided flats in the city are hotter inside than outside, with temperatures reaching up to 35.1°C, causing physical discomfort, difficulty concentrating. and increased mental stress for residents. A 2022 Oxfam study on waste collection centers showed average indoor temperatures of 32.2°C and widespread issues like poor ventilation and lack of rest areas. Over 60% of cleaners reported discomfort at work, and over 70% needed to take breaks in shaded street areas. Interviews in 2024 revealed that 90% of street cleaners suffered from heat-related symptoms like fatigue and dizziness, highlighting the severe impact of climate change. on low-income workers in Hong Kong. air conditioning / endure / install / low-income / many / poor / prevent / ventilation ca Limited spaces forcing families during extreme heat.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/서술형-04.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/서술형-04.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 9
+      },
+      "finalAnswer": "limited space → poor ventilation",
+      "answerMatch": null,
+      "body": "**[서술형 4]** (원문 발문: 빈칸에 들어갈 내용으로 밑줄 친 residents가 겪는 어려움의 이유를 설명하는 문장을 완성하시오.) **[5점]**\n\nOxfam Hong Kong's 2021 study found that nearly half of subdivided flats in the city are hotter inside than outside, with temperatures reaching up to 35.1°C, causing physical discomfort, difficulty concentrating, and increased mental stress for <u>residents</u>.\n\nA 2022 Oxfam study on waste collection centers showed average indoor temperatures of 32.2°C and widespread issues like poor ventilation and lack of rest areas. Over 60% of cleaners reported discomfort at work, and over 70% needed to take breaks in shaded street areas. Interviews in 2024 revealed that 90% of street cleaners suffered from heat-related symptoms like fatigue and dizziness, highlighting the severe impact of climate change on low-income workers in Hong Kong.\n\n> air conditioning / endure / install / low-income / many / poor / prevent / ventilation\n\n☞ Limited spaces `____` `____` , forcing `____` families `____` during extreme heat."
+    },
+    {
+      "id": "서술형-05",
+      "group": "서술형",
+      "number": 5,
+      "text": "[서술형 5] 다음의 밑줄 친 부분에 근거하여 단순 계 산하였을 때, a house mouse가 일생 동안 출산 가능한 횟수와 낳을 수 있는 새끼의 수의 범위를 쓰시오. (단, 모든 출산 가능한 주기에 출산한다고 가정함.) [3점 / 각 1점] In most respects, humans are one of a relatively small number of species that evolved a very different strategy of investing more energy to reproduce more slowly. Like apes and elephants, we mature at a leisurely pace, grow large bodies, and have few babies but devote much time and energy to raising them well. This unusual strategy succeeds because while apes and elephants produce fewer babies than mice, a larger percentage of their offspring survive to then reproduce. A house mouse typically gives birth to her first litter at about eight weeks old, has four to ten pups per litter, and can have a new litter every two months over the course of her approximately thirteen-month life. However, the vast majority of her pups die young. In contrast, a chimp or elephant mother does not reproduce until she is at least twelve years old, and she gives birth to only one infant every five or six years over the next thirty or so years. About half of these offspring make it to becoming parents. 출산 회 최소 마리 최대 마리 답안지의 해당란에 필요한 내용을 정확히 기입(표기)했 는지 확인하시오.",
+      "image": "data/exams/금호고_공통영어1_기말_2025/images/서술형-05.png",
+      "answer": "",
+      "answerText": "",
+      "solutionMd": "data/exams/금호고_공통영어1_기말_2025/solutions/서술형-05.md",
+      "solutionStatus": "generated",
+      "source": {
+        "pdf": "pdfs/[2025년 기출] 금호고등학교 (서울 성동구) 1학년 1학기 기말 공통영어1 천재(강상구).pdf",
+        "page": 10
+      },
+      "finalAnswer": "6회 / 24~60마리",
+      "answerMatch": null,
+      "body": "**[서술형 5]** 다음의 밑줄 친 부분에 근거하여 단순 계산하였을 때, a house mouse가 일생 동안 출산 가능한 횟수와 낳을 수 있는 새끼의 수의 범위를 쓰시오. (단, 모든 출산 가능한 주기에 출산한다고 가정함.) **[3점 / 각 1점]**\n\nIn most respects, humans are one of a relatively small number of species that evolved a very different strategy of investing more energy to reproduce more slowly. Like apes and elephants, we mature at a leisurely pace, grow large bodies, and have few babies but devote much time and energy to raising them well. This unusual strategy succeeds because while apes and elephants produce fewer babies than mice, a larger percentage of their offspring survive to then reproduce. <u>A house mouse typically gives birth to her first litter at about eight weeks old, has four to ten pups per litter, and can have a new litter every two months over the course of her approximately thirteen-month life.</u> However, the vast majority of her pups die young. In contrast, a chimp or elephant mother does not reproduce until she is at least twelve years old, and she gives birth to only one infant every five or six years over the next thirty or so years. About half of these offspring make it to becoming parents.\n\n(1) 출산 `____` 회\n\n(2) 최소 `____` 마리\n\n(3) 최대 `____` 마리"
+    }
+  ]
+}

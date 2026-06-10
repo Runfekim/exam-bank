@@ -8,6 +8,13 @@
 'use strict';
 
 (function () {
+  // localhost(또는 file://)에서만 로컬 전용 기능을 노출한다.
+  // - 어드민 버튼: 공개 GitHub Pages 에는 숨김
+  // - 원본 PDF 링크: PDF는 로컬에만 두므로(공개 저장소 미포함) 로컬에서만 표시
+  const IS_LOCAL =
+    location.protocol === 'file:' ||
+    /^(localhost|127\.0\.0\.1|0\.0\.0\.0|\[::1\])$/.test(location.hostname);
+
   // ---- DOM refs ----------------------------------------------------------
   const $ = (sel, root = document) => root.querySelector(sel);
 
@@ -26,6 +33,10 @@
     examList: $('#exam-list'),
     listEmpty: $('#list-empty'),
     listError: $('#list-error'),
+    globalResults: $('#global-results'),
+    globalCount: $('#global-count'),
+    gresultList: $('#gresult-list'),
+    globalEmpty: $('#global-empty'),
 
     // view: exam
     viewExam: $('#view-exam'),
@@ -50,11 +61,16 @@
     detailSourceLabel: $('#detail-source-label'),
     detailClose: $('#detail-close'),
     detailImage: $('#detail-image'),
+    detailFigure: $('#detail-figure'),
     detailTitle: $('#detail-title'),
+    qviewSeg: $('#qview-seg'),
+    detailQbody: $('#detail-qbody'),
+    detailQbodyContent: $('#detail-qbody-content'),
     solutionContent: $('#solution-content'),
 
     // header
     themeToggle: $('#theme-toggle'),
+    adminLink: $('#admin-link'),
   };
 
   // ---- State -------------------------------------------------------------
@@ -71,6 +87,10 @@
     lastFocused: null,
     mdCache: new Map(),
     dbCache: new Map(),      // id -> db.json (avoid refetch)
+    currentQ: null,          // 상세 모달에 열린 문항(보기 전환용)
+    searchIndex: null,       // data/search-index.json (전체 검색)
+    searchIndexLoading: null,
+    pendingOpenQid: null,    // 딥링크/검색결과로 진입 시 열 문항 id
   };
 
   // ---- Utilities ---------------------------------------------------------
@@ -92,6 +112,32 @@
       .replace(/[-]/g, ' ')   // BMP private use area
       .replace(/\s+/g, ' ')
       .trim();
+  }
+
+  // 마크다운/수식/HTML 제거 → 평문(검색용, 자르지 않음).
+  function bodyText(s) {
+    if (!s) return '';
+    return String(s)
+      .replace(/<\/?[a-zA-Z][^>]*>/g, ' ')               // HTML 태그(<u> 등)
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')              // 이미지
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')             // 링크 → 텍스트
+      .replace(/\$\$[\s\S]*?\$\$/g, ' ').replace(/\$[^$\n]*\$/g, ' ')  // 수식
+      .replace(/\\[a-zA-Z]+/g, ' ')                        // LaTeX 명령
+      .replace(/[#>*_`~|\\{}$^]/g, ' ')
+      .replace(/[-]/g, ' ')                   // PUA
+      .replace(/\s+/g, ' ').trim();
+  }
+
+  // 카드 썸네일용 본문 미리보기: 마크다운 기호 제거 후 앞부분만.
+  function previewText(s) {
+    if (!s) return '';
+    return String(s)
+      .replace(/[#>*_`~]/g, '')
+      .replace(/\$[^$]*\$/g, ' ')      // 인라인 수식 제거
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 160);
   }
 
   function debounce(fn, ms) {
@@ -139,8 +185,17 @@
   // ============================================================
   function parseHash() {
     const raw = (location.hash || '').replace(/^#/, '');
-    const parts = raw.split('/').filter(Boolean);  // e.g. ['exam','수능수학_2026']
+    const parts = raw.split('/').filter(Boolean);  // e.g. ['exam','수능수학_2026'] | ['exam',id,'q',qid]
     if (parts[0] === 'exam' && parts[1]) {
+      // 딥링크: #/exam/<id>/q/<qid> — 특정 문항 모달 열기
+      const qi = parts.indexOf('q');
+      if (qi >= 2 && parts[qi + 1]) {
+        return {
+          name: 'exam',
+          id: decodeURIComponent(parts.slice(1, qi).join('/')),
+          qid: decodeURIComponent(parts.slice(qi + 1).join('/')),
+        };
+      }
       return { name: 'exam', id: decodeURIComponent(parts.slice(1).join('/')) };
     }
     return { name: 'list' };
@@ -161,10 +216,13 @@
         location.replace('#/');
         return;
       }
+      state.pendingOpenQid = r.qid || null;   // 딥링크로 열 문항(있으면)
       showExamView();
       await loadExam(r.id);
     } else {
       showListView();
+      // 홈 진입 시 현재 검색어가 있으면 전체 검색 결과 갱신
+      runListSearch();
     }
   }
 
@@ -173,7 +231,7 @@
     document.body.dataset.route = which;       // 홈(list)에선 푸터 숨김 (CSS)
     els.viewList.hidden = !isList;
     els.viewExam.hidden = isList;
-    els.searchWrap.hidden = isList;            // search only on exam view
+    els.searchWrap.hidden = false;             // 검색은 두 뷰 모두 노출(홈=전체검색)
     els.main.focus({ preventScroll: true });
     window.scrollTo(0, 0);
   }
@@ -246,6 +304,100 @@
       '</div>' +
       `<span class="exam-card-arrow" aria-hidden="true">${svgUse('i-chevron-right', 'icon icon-sm')}</span>`;
     return a;
+  }
+
+  // ============================================================
+  //  전체(교차) 검색 — data/search-index.json (정적, 서버 불필요)
+  //  GitHub Pages엔 서버 DB가 없으므로 정적 인덱스 + 순수 JS 검색이 대안.
+  // ============================================================
+  function loadSearchIndex() {
+    if (state.searchIndex) return Promise.resolve(state.searchIndex);
+    if (state.searchIndexLoading) return state.searchIndexLoading;
+    state.searchIndexLoading = (async () => {
+      try {
+        const res = await fetch('data/search-index.json', { cache: 'no-cache' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        state.searchIndex = json && Array.isArray(json.questions) ? json : { questions: [] };
+      } catch (err) {
+        console.error('[EXAM Bank] search-index.json load failed:', err);
+        state.searchIndex = { questions: [] };
+      }
+      return state.searchIndex;
+    })();
+    return state.searchIndexLoading;
+  }
+
+  // 다중어 AND 부분매치 + 앞쪽/번호 가산 스코어링(의존성 없음).
+  function searchQuestions(query) {
+    const idx = state.searchIndex;
+    if (!idx) return [];
+    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!terms.length) return [];
+    const scored = [];
+    for (const q of idx.questions) {
+      const hay = q.s || '';
+      let ok = true, score = 0;
+      for (const t of terms) {
+        const i = hay.indexOf(t);
+        if (i < 0) { ok = false; break; }
+        score += 2 - Math.min(1, i / 240);             // 앞쪽 매치 가산
+        if (`${q.group} ${q.number}` === t || String(q.number) === t) score += 2;
+      }
+      if (ok) scored.push({ q, score });
+    }
+    scored.sort((a, b) =>
+      b.score - a.score ||
+      a.q.examTitle.localeCompare(b.q.examTitle, 'ko') ||
+      (a.q.number - b.q.number));
+    return scored.slice(0, 80).map((x) => x.q);
+  }
+
+  async function runListSearch() {
+    if (parseHash().name !== 'list') return;
+    const query = (els.search.value || '').trim();
+    if (!query) {
+      els.globalResults.hidden = true;
+      els.globalEmpty.hidden = true;
+      els.examList.hidden = false;
+      return;
+    }
+    await loadSearchIndex();
+    // 비동기 로드 사이 라우트/검색어가 바뀌었으면 무시
+    if (parseHash().name !== 'list' || (els.search.value || '').trim() !== query) return;
+    const results = searchQuestions(query);
+    els.examList.hidden = true;
+    if (!results.length) {
+      els.globalResults.hidden = true;
+      els.globalEmpty.hidden = false;
+      return;
+    }
+    els.globalEmpty.hidden = true;
+    els.globalResults.hidden = false;
+    els.globalCount.textContent = `${results.length}개 문항 · ${results.length >= 80 ? '상위 80개' : '전체'}`;
+    const frag = document.createDocumentFragment();
+    for (const q of results) frag.appendChild(makeGlobalResult(q));
+    els.gresultList.replaceChildren(frag);
+  }
+
+  function makeGlobalResult(q) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'gresult';
+    const ans = (q.answer || '').trim();
+    btn.innerHTML =
+      '<div class="gresult-top">' +
+        `<span class="gresult-exam">${escapeHTML(q.examTitle)}</span>` +
+        `<span class="gresult-loc">${escapeHTML(q.group)} ${q.number}</span>` +
+        (ans
+          ? `<span class="badge badge-answer">${svgUse('i-check', 'icon icon-xs')}<span>${escapeHTML(ans)}</span></span>`
+          : '') +
+      '</div>' +
+      `<p class="gresult-snip">${escapeHTML(q.snippet || '')}</p>`;
+    btn.addEventListener('click', () => {
+      location.hash = `#/exam/${encodeURIComponent(q.examId)}/q/${encodeURIComponent(q.id)}`;
+    });
+    return btn;
   }
 
   // ============================================================
@@ -328,6 +480,13 @@
     }
     buildGroupFilters();
     renderGrid();
+
+    // 딥링크/전체검색 결과로 진입한 경우 해당 문항 모달 열기
+    if (state.pendingOpenQid) {
+      const q = state.questions.find((x) => x.id === state.pendingOpenQid);
+      state.pendingOpenQid = null;
+      if (q) openDetail(q, null);
+    }
   }
 
   // ---- Group filter chips ------------------------------------------------
@@ -391,6 +550,7 @@
         String(item.number),
         `${item.group} ${item.number}`,
         cleanText(item.text),
+        item.body ? bodyText(item.body) : '',   // 전사 본문까지 검색
         item.answer,
         item.answerText,
       ].filter(Boolean).join(' ').toLowerCase();
@@ -466,6 +626,13 @@
         figBtn.innerHTML = '<span class="thumb-fallback">이미지를 불러올 수 없습니다</span>';
       });
       figBtn.appendChild(img);
+    } else if (q.body || q.text) {
+      // 텍스트 전사형 문항: 본문 미리보기(스니펫)
+      figBtn.classList.add('thumb-text');
+      const p = document.createElement('p');
+      p.className = 'thumb-text-preview';
+      p.textContent = previewText(q.body || q.text);
+      figBtn.appendChild(p);
     } else {
       figBtn.classList.add('thumb-error');
       figBtn.innerHTML = '<span class="thumb-fallback">이미지 없음</span>';
@@ -510,8 +677,9 @@
       els.detailAnswer.hidden = true;
     }
 
+    // PDF는 로컬에만 보관(공개 저장소 미포함) → 로컬에서만 원본 링크 노출
     const href = sourcePdfHref(q);
-    if (href) {
+    if (href && IS_LOCAL) {
       els.detailSource.href = href;
       els.detailSourceLabel.textContent = `원본 문제 PDF p.${(q.source && q.source.page) || 1}`;
       els.detailSource.hidden = false;
@@ -519,20 +687,63 @@
       els.detailSource.hidden = true;
     }
 
+    // 이미지/본문 준비 + 보기 전환(원본 이미지 ↔ 텍스트 모던카드)
     if (q.image) {
       els.detailImage.src = q.image;
       els.detailImage.alt = `${numLabel} 문항 이미지`;
-      els.detailImage.parentElement.hidden = false;
     } else {
       els.detailImage.removeAttribute('src');
-      els.detailImage.parentElement.hidden = true;
     }
+    delete els.detailQbody.dataset.rendered;   // 본문 렌더 캐시 초기화(문항별)
+    els.detailQbodyContent.replaceChildren();
+    state.currentQ = q;
+    setupQView(q);
 
     renderSolution(q);
 
     els.detail.hidden = false;
     document.body.classList.add('modal-open');
     requestAnimationFrame(() => els.detailClose.focus());
+  }
+
+  // ---- 문항 보기 전환 (원본 이미지 ↔ 텍스트 모던카드) -------------------
+  const QVIEW_KEY = 'exambank.qview';
+  function preferredQView() {
+    try {
+      const v = localStorage.getItem(QVIEW_KEY);
+      if (v === 'image' || v === 'text') return v;
+    } catch (e) { /* ignore */ }
+    return 'text';   // 기본: 텍스트(가독성·완전성). 둘 다 있을 때만 의미.
+  }
+
+  function setupQView(q) {
+    const hasImage = !!q.image;
+    const hasBody = !!q.body;
+    const both = hasImage && hasBody;
+    els.qviewSeg.hidden = !both;
+    // 둘 다 있으면 저장된 선호, 아니면 가진 쪽으로.
+    const mode = both ? preferredQView() : (hasBody ? 'text' : 'image');
+    applyQView(q, mode);
+  }
+
+  function applyQView(q, mode) {
+    const showText = mode === 'text';
+    // 원본 이미지
+    els.detailFigure.hidden = !q.image || showText;
+    // 텍스트 본문(모던카드) — 최초 표시 때 1회 렌더
+    if (q.body) {
+      els.detailQbody.hidden = !showText;
+      if (showText && !els.detailQbody.dataset.rendered) {
+        renderInlineMarkdown(els.detailQbodyContent, q.body);
+        els.detailQbody.dataset.rendered = '1';
+      }
+    } else {
+      els.detailQbody.hidden = true;
+    }
+    // 세그 상태
+    for (const b of els.qviewSeg.querySelectorAll('.qview-opt')) {
+      b.setAttribute('aria-pressed', String(b.dataset.mode === mode));
+    }
   }
 
   function setSolutionContent(html) {
@@ -586,6 +797,19 @@
     typesetMath(wrap);
   }
 
+  // 문자열 마크다운(문항 본문 등)을 임의 컨테이너에 렌더 + 수식 조판.
+  async function renderInlineMarkdown(target, mdText) {
+    target.innerHTML = '<p class="solution-loading">불러오는 중…</p>';
+    const ready = await waitFor(() => typeof window.marked !== 'undefined', 4000);
+    if (!ready) { target.textContent = mdText; return; }
+    const parse = window.marked.parse || window.marked;
+    const wrap = document.createElement('div');
+    wrap.className = 'markdown-body';
+    wrap.innerHTML = parse(mdText, { gfm: true, breaks: true });
+    target.replaceChildren(wrap);
+    typesetMath(wrap);
+  }
+
   // 렌더된 풀이에 시각 구조 클래스 부여: 섹션 구분선 · 볼드 단계 · 정답 콜아웃
   function structureSolution(root) {
     root.querySelectorAll('h2').forEach((h, i) => { if (i > 0) h.classList.add('md-divider'); });
@@ -615,6 +839,8 @@
     els.detail.hidden = true;
     document.body.classList.remove('modal-open');
     els.solutionContent.replaceChildren();
+    els.detailQbodyContent.replaceChildren();
+    els.detailQbody.hidden = true;
     els.detailImage.removeAttribute('src');
     const target = state.lastFocused;
     state.lastFocused = null;
@@ -653,17 +879,21 @@
   // ---- Events ------------------------------------------------------------
   function bindEvents() {
     const onSearch = debounce(() => {
-      state.query = els.search.value;
       els.searchClear.hidden = !els.search.value;
-      renderGrid();
+      if (parseHash().name === 'exam') {
+        state.query = els.search.value;
+        renderGrid();
+      } else {
+        runListSearch();           // 홈 = 전체(교차) 검색
+      }
     }, 140);
     els.search.addEventListener('input', onSearch);
 
     els.searchClear.addEventListener('click', () => {
       els.search.value = '';
-      state.query = '';
       els.searchClear.hidden = true;
-      renderGrid();
+      if (parseHash().name === 'exam') { state.query = ''; renderGrid(); }
+      else runListSearch();
       els.search.focus();
     });
 
@@ -673,12 +903,23 @@
     els.detailClose.addEventListener('click', closeDetail);
     els.detailBackdrop.addEventListener('click', closeDetail);
 
+    // 문항 보기 전환(원본 이미지 ↔ 텍스트) — 선택 기억
+    els.qviewSeg.addEventListener('click', (e) => {
+      const btn = e.target.closest('.qview-opt');
+      if (!btn || !state.currentQ) return;
+      const mode = btn.dataset.mode;
+      try { localStorage.setItem(QVIEW_KEY, mode); } catch (err) { /* ignore */ }
+      applyQView(state.currentQ, mode);
+    });
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         if (!els.detail.hidden) { e.preventDefault(); closeDetail(); return; }
         if (document.activeElement === els.search && els.search.value) {
-          els.search.value = ''; state.query = '';
-          els.searchClear.hidden = true; renderGrid();
+          els.search.value = '';
+          els.searchClear.hidden = true;
+          if (parseHash().name === 'exam') { state.query = ''; renderGrid(); }
+          else runListSearch();
         }
       }
       trapFocus(e);
@@ -696,6 +937,7 @@
 
   // ---- Init --------------------------------------------------------------
   function init() {
+    if (els.adminLink && IS_LOCAL) els.adminLink.hidden = false;  // 로컬에서만 관리자 진입 노출
     bindEvents();
     route();   // resolves current hash (list or deep-linked exam)
   }
